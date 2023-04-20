@@ -56,11 +56,13 @@ public class Adapter_Shortcuts extends RecyclerView.Adapter<Adapter_Shortcuts.Sh
 
                 Toast.makeText(mContext, "Category ID: " + categoryId, Toast.LENGTH_SHORT).show();
                 String activityId = mShortcutsList.get(position).getActivity();
+                String serviceName = mShortcutsList.get(position).getName();
                 Intent intent = null;
 
                 Class<?> activityClass = new Function_ActivityMap().getActivityClass(activityId);
 
                 intent = new Intent(mContext, activityClass);
+                intent.putExtra("serviceTitle", serviceName);
 
                 mContext.startActivity(intent);
             }

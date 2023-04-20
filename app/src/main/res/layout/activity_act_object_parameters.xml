@@ -139,21 +139,29 @@
                                 android:id="@+id/view4"
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
-                                android:foreground="@android:drawable/btn_dialog" />
+                                android:background="@drawable/circle_yellow"
+                                android:visibility="gone" />
 
                             <EditText
                                 android:id="@+id/eTxt_ObjectSize"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_height="50dp"
                                 android:ems="10"
                                 android:hint="Tamaño (cm)"
                                 android:inputType="numberDecimal" />
+
+                            <Space
+                                android:layout_width="70dp"
+                                android:layout_height="wrap_content" />
 
                             <CheckBox
                                 android:id="@+id/chBox_ObjectSize"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="N/A" />
+                                android:text="N/A"
+
+                                />
+
 
                         </TableRow>
 
@@ -169,7 +177,8 @@
                                 android:id="@+id/view7"
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
-                                android:foreground="@android:drawable/btn_dialog" />
+                                android:foreground="@android:drawable/btn_dialog"
+                                android:visibility="gone" />
 
                             <EditText
                                 android:id="@+id/eTxt_ObjectForm"
@@ -178,6 +187,10 @@
                                 android:ems="10"
                                 android:hint="Forma"
                                 android:inputType="textPersonName" />
+
+                            <Space
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
 
                             <CheckBox
                                 android:id="@+id/chBox_ObjectForm"
@@ -198,7 +211,8 @@
                                 android:id="@+id/view8"
                                 android:layout_width="50dp"
                                 android:layout_height="50dp"
-                                android:foreground="@android:drawable/btn_dialog" />
+                                android:foreground="@android:drawable/btn_dialog"
+                                android:visibility="gone" />
 
                             <EditText
                                 android:id="@+id/eTxt_ObjectMaterial"
@@ -207,6 +221,10 @@
                                 android:ems="10"
                                 android:hint="Material"
                                 android:inputType="textPersonName" />
+
+                            <Space
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content" />
 
                             <CheckBox
                                 android:id="@+id/chBox_ObjectMaterial"

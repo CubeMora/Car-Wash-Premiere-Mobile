@@ -87,6 +87,7 @@ public class Act_CarParameters extends AppCompatActivity {
                 bundle.putString("carType", txt_CarType.getText().toString());
                 bundle.putStringArrayList("extraServices", new ArrayList<>(adapterExtraServicesCar.getSelectedServices()));
                 bundle.putStringArrayList("details", new ArrayList<>(adapterDetailsCar.getSelectedDetails()));
+                bundle.putString("bundleType", "car");
 
                 // Iniciar la actividad final y pasar el Bundle como argumento
                 Intent intent = new Intent(Act_CarParameters.this, Act_OrderDetail.class);

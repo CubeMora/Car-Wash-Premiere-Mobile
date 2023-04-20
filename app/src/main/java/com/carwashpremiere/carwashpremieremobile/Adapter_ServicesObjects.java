@@ -56,6 +56,7 @@ public class Adapter_ServicesObjects extends RecyclerView.Adapter<Adapter_Servic
                 Class<?> activityClass = new Function_ActivityMap().getActivityClass(activityId);
 
                 intent = new Intent(mContext, activityClass);
+                intent.putExtra("objectTitle", mServicesObjectsList.get(position).getTitle());
 
                 mContext.startActivity(intent);
             }

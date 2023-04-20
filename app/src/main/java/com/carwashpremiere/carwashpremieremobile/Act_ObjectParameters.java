@@ -5,10 +5,13 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +34,9 @@ public class Act_ObjectParameters extends AppCompatActivity {
     CheckBox chBox_ObjectSize, chBox_ObjectForm, chBox_ObjectMaterial;
     Button btn_Next;
 
+    String tempObjectSize, tempObjectForm, tempObjectMaterial;
+
+
     Function_NetworkRequests networkRequests;
 
     Adapter_DetailsObject adapterDetailsObject;
@@ -50,6 +56,12 @@ public class Act_ObjectParameters extends AppCompatActivity {
 
         initUI();
 
+        Intent intent = getIntent();
+        txt_ObjectTitle.setText(intent.getStringExtra("objectTitle"));
+
+        cardView_ExtraServicesObject.setVisibility(View.GONE);
+        cardView_TitleObjectExtraServices.setVisibility(View.GONE);
+
 
         networkRequests = new Function_NetworkRequests(this);
 
@@ -68,6 +80,81 @@ public class Act_ObjectParameters extends AppCompatActivity {
         rList_DetailsObject.setLayoutManager(linearLayoutManagerDetails);
         rList_DetailsObject.setAdapter(adapterDetailsObject);
         getDetailsObjectsFromServer(networkRequests);
+
+        btn_Next.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                Bundle bundle = new Bundle();
+                bundle.putString("objectTitle", txt_ObjectTitle.getText().toString());
+                bundle.putString("objectSize", eTxt_ObjectSize.getText().toString());
+                bundle.putString("objectForm", eTxt_ObjectForm.getText().toString());
+                bundle.putString("objectMaterial", eTxt_ObjectMaterial.getText().toString());
+                bundle.putStringArrayList("extraServices", new ArrayList<>(adapterExtraServiceObject.getSelectedServices()));
+                bundle.putStringArrayList("details", new ArrayList<>(adapterDetailsObject.getSelectedDetails()));
+                bundle.putString("bundleType", "object");
+
+                Intent intent = new Intent(Act_ObjectParameters.this, Act_OrderDetail.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+        chBox_ObjectSize.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    // Deshabilitar EditText y establecer el texto predeterminado "N/A"
+                    eTxt_ObjectSize.setEnabled(false);
+                    // Guardar el valor actual del EditText en la variable auxiliar
+                    tempObjectSize = eTxt_ObjectSize.getText().toString();
+                    eTxt_ObjectSize.setText("N/A");
+
+                } else {
+
+
+                    // Habilitar EditText y mostrar el valor guardado
+                    eTxt_ObjectSize.setEnabled(true);
+                    eTxt_ObjectSize.setText(tempObjectSize);
+                }
+            }
+        });
+
+        chBox_ObjectForm.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+
+                    eTxt_ObjectForm.setEnabled(false);
+
+                    tempObjectForm = eTxt_ObjectForm.getText().toString();
+                    eTxt_ObjectForm.setText("N/A");
+                } else {
+
+
+                    eTxt_ObjectForm.setEnabled(true);
+                    eTxt_ObjectForm.setText(tempObjectForm);
+                }
+            }
+        });
+
+        chBox_ObjectMaterial.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+
+                    eTxt_ObjectMaterial.setEnabled(false);
+                    tempObjectMaterial = eTxt_ObjectMaterial.getText().toString();
+                    eTxt_ObjectMaterial.setText("N/A");
+                } else {
+
+                    eTxt_ObjectMaterial.setEnabled(true);
+                    eTxt_ObjectMaterial.setText(tempObjectMaterial);
+                }
+            }
+        });
+
 
 
 
@@ -112,6 +199,15 @@ public class Act_ObjectParameters extends AppCompatActivity {
                     }
 
                     adapterExtraServiceObject.notifyDataSetChanged();
+
+                    if (mExtraServicesObjectsList.size() == 0) {
+                        cardView_ExtraServicesObject.setVisibility(View.GONE);
+                        cardView_TitleObjectExtraServices.setVisibility(View.GONE);
+                    } else {
+                        cardView_ExtraServicesObject.setVisibility(View.VISIBLE);
+                        cardView_TitleObjectExtraServices.setVisibility(View.VISIBLE);
+                    }
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
