@@ -16,9 +16,6 @@
 
 Teacher: Alondra Ramos
 
-[Github project upload](https://www.notion.so/Github-project-upload-44149f2ebc6642f8b474d29ce64b653c)
-
-[Asana Creation](https://www.notion.so/Asana-Creation-a4dec5abb6cb4b5cad3e836003660a71)
 
 
 
