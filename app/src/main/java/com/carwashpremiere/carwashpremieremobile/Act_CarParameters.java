@@ -30,7 +30,7 @@ public class Act_CarParameters extends AppCompatActivity {
     Function_NetworkRequests networkRequests;
     TextView txt_TotalPrice, txt_ServiceTitle, txt_CarType;
     RecyclerView List_ExtraServicesCar, List_DetailsCar;
-    Button btn_Next;
+    Button btn_Next, btn_Back;
 
     // Define initial value for total price
     private double totalPrice = 0.0;
@@ -73,8 +73,25 @@ public class Act_CarParameters extends AppCompatActivity {
         adapterExtraServicesCar.setOnTotalPriceChangedListener(new Adapter_ExtraServicesCar.OnTotalPriceChangedListener() {
             @Override
             public void onTotalPriceChanged(double totalPrice) {
+                // Update the class-level totalPrice variable
+                Act_CarParameters.this.totalPrice = totalPrice;
+
                 // Update the UI with the new total price
                 txt_TotalPrice.setText(String.format("Total: $%.2f", totalPrice));
+            }
+        });
+
+
+        btn_Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Terminar la actividad y regresar al menú principal
+
+                Intent intent = new Intent(Act_CarParameters.this, Act_DescriptionCars.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                startActivity(intent);
+                finish();
             }
         });
 
@@ -88,6 +105,8 @@ public class Act_CarParameters extends AppCompatActivity {
                 bundle.putStringArrayList("extraServices", new ArrayList<>(adapterExtraServicesCar.getSelectedServices()));
                 bundle.putStringArrayList("details", new ArrayList<>(adapterDetailsCar.getSelectedDetails()));
                 bundle.putString("bundleType", "car");
+                bundle.putDouble("totalPrice", totalPrice);
+
 
                 // Iniciar la actividad final y pasar el Bundle como argumento
                 Intent intent = new Intent(Act_CarParameters.this, Act_OrderDetail.class);
@@ -105,6 +124,8 @@ public class Act_CarParameters extends AppCompatActivity {
         btn_Next = findViewById(R.id.btn_NextObjectOrderDetail);
         txt_ServiceTitle = findViewById(R.id.txt_HeaderCarServiceDetail);
         txt_CarType = findViewById(R.id.txt_ServiceDescription);
+        btn_Back = findViewById(R.id.btn_Back);
+
     }
 
     public void getExtraServicesCarsFromServer(Function_NetworkRequests networkRequests) {

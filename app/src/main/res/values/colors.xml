@@ -8,6 +8,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+
+    <color name="orange">#FF9900</color>
     <color name="seed">#0D88E6</color>
     <color name="md_theme_light_primary">#0061A7</color>
     <color name="md_theme_light_onPrimary">#FFFFFF</color>
@@ -70,14 +72,14 @@
     <color name="md_theme_dark_outlineVariant">#43474E</color>
     <color name="md_theme_dark_scrim">#000000</color>
     <color name="PrimaryVariant">#E6EBFA</color>
-    <color name="SecondaryVariant">#FFE1B5</color>
+    <color name="SecondaryVariant">#FFE5BF</color>
 
 
-    <color name="colorOnSecondaryVariant">#FFFFFF</color>
+    <color name="colorOnSecondaryVariant">#E4E4E4</color>
     <color name="colorSecondaryVariantContainer">#FFDEAC</color>
     <color name="colorOnSecondaryVariantContainer">#281900</color>
 
-    <color name="colorOnPrimaryVariant">#FFFFFF</color>
+    <color name="colorOnPrimaryVariant">#E6EBFA</color>
     <color name="colorPrimaryVariantContainer">#D6E3FF</color>
     <color name="colorOnPrimaryVariantContainer">#001B3D</color>
 

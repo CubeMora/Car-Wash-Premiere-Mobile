@@ -1,58 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Act_DescriptionCars">
 
-    <View
+
+
+    <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/view2"
-        android:layout_width="0dp"
-        android:layout_height="220dp"
-        android:background="@drawable/shape_header"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/txt_HeaderCarServiceDetail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-medium"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/view2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view2"
-        app:layout_constraintVertical_bias="0.298" />
+        android:layout_height="300dp"
+        android:layout_width="match_parent">
 
-    <TextView
-        android:id="@+id/txt_HeaderCarDetailSub"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-light"
-        android:text="Detalles"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/view2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_HeaderCarServiceDetail" />
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            app:contentScrim="@android:color/holo_orange_dark"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:layout_scrollInterpolator="@android:anim/decelerate_interpolator"
+
+
+            app:toolbarId="@+id/toolbar_Main">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <ImageView
+                    android:id="@+id/app_bar_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:alpha="50"
+
+
+                    android:backgroundTint="#FFFFFF"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/banner2"
+                    app:layout_collapseMode="parallax"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/app_bar_image"
+                    >
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:src="@drawable/shape_header"
+                        />
+
+                    <Button
+                        android:id="@+id/btn_Back"
+
+                        style="@style/Widget.Material3.Button.Icon"
+                        android:layout_width="43dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="start"
+                        android:layout_marginStart="30dp"
+
+
+                        android:layout_marginTop="10dp"
+
+
+                        android:layout_marginBottom="48dp"
+                        app:backgroundTint="@color/seed"
+                        app:icon="@drawable/baseline_chevron_left_24"
+                        app:iconGravity="textEnd"
+                        app:iconPadding="8dp"
+                        app:iconSize="100px"
+                        app:iconTint="@color/white"
+                        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:fontFamily="sans-serif-condensed"
+                        android:gravity="center"
+                        style="@style/NavTitle"
+                        android:text="@string/title_activity_auto_parameters_description"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/app_bar_image"
+
+                        />
+
+                    <TextView
+                        android:id="@+id/textView5"
+                        style="@style/NavSubTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:fontFamily="sans-serif-condensed"
+                        android:gravity="center"
+                        android:layout_gravity="bottom"
+                        android:text="@string/subtitle_activity_auto_description"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/app_bar_image"
+
+                        />
+
+                </androidx.cardview.widget.CardView>
+
+                <ImageView
+                    android:id="@+id/TopCardView"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="@drawable/shape_background"
+
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="70dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/view2"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="60dp"
+
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="0dp"
         android:background="#FFFFFF"
         android:fillViewport="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view2">
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+        >
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -80,6 +181,8 @@
                         android:layout_height="30dp"
                         android:fontFamily="sans-serif-black"
                         android:text="Descripción"
+                        style="@style/SubTitle"
+
                         android:textAlignment="textStart"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -87,35 +190,43 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.533" />
 
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/circle"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </LinearLayout>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_serviceDescription"
+            <com.google.android.material.textfield.TextInputLayout
+
+                android:id="@+id/outlinedTextField"
+
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:cardBackgroundColor="#FFFFFF"
-                app:cardCornerRadius="2dp"
-                app:cardElevation="5dp">
+                android:layout_height="150dp"
+                app:boxCornerRadiusBottomEnd="20dp"
+                android:background="@drawable/shape_textview_background"
+
+
+                android:layout_margin="16dp"
+
+                >
 
                 <TextView
                     android:id="@+id/txt_ServiceDescription"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-            </androidx.cardview.widget.CardView>
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+
+                    android:lines="6"
+                    style="@style/TextAreaInput"
+
+                    android:gravity="top"
+                    android:overScrollMode="always"
+                    android:scrollbarStyle="insideInset"
+                    android:scrollHorizontally="false"
+                    android:scrollbars="vertical"
+
+
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
                 android:id="@+id/linLay_TitulosExtraService"
@@ -139,6 +250,8 @@
                         android:layout_height="30dp"
                         android:fontFamily="sans-serif-black"
                         android:text="Tipo de auto"
+                        style="@style/SubTitle"
+
                         android:textAlignment="textStart"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -146,15 +259,6 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.533" />
 
-                    <TextView
-                        android:id="@+id/shp_TitulosCarType"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/circle"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.cardview.widget.CardView
@@ -173,50 +277,93 @@
 
             </LinearLayout>
 
-            <Spinner
-                android:id="@+id/sp_CarType"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                app:boxBackgroundMode="outline"
+                android:layout_height="60dp"
                 android:layout_width="match_parent"
-                android:layout_height="51dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="10dp" />
+                android:hint="select"
+                android:layout_margin="16dp"
+
+
+
+
+
+                >
+
+                <AutoCompleteTextView
+                    android:id="@+id/autoComplete_CarType"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="none"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.bottomappbar.BottomAppBar
-        android:id="@+id/bottomAppBar"
+
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/menuBottomNav"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        app:backgroundTint="@color/purple_500"
-        app:fabAnimationMode="slide"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_height="60dp"
+        android:background="@drawable/shape_bottom_nav_everything"
+        app:itemTextColor="@drawable/menu_bar_select"
+        app:itemIconTint="@drawable/menu_bar_select"
 
-    <Button
-        android:id="@+id/btn_NextObjectOrderDetail"
-        android:layout_width="127dp"
-        android:layout_height="68dp"
+        android:layout_alignParentBottom="true" >
 
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/purple_700"
-        android:text="Siguiente"
-        android:textColor="@color/purple_500"
-        app:cornerRadius="100dp"
-        app:layout_constraintBottom_toBottomOf="@+id/bottomAppBar"
-        app:layout_constraintEnd_toEndOf="@+id/bottomAppBar" />
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center">
 
-    <TextView
-        android:id="@+id/txt_TotalPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="@+id/bottomAppBar"
-        app:layout_constraintStart_toStartOf="@+id/bottomAppBar"
-        app:layout_constraintTop_toTopOf="@+id/bottomAppBar" />
+            <!-- Utilizamos un LinearLayout con orientación horizontal como contenedor -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/txt_TotalPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    style="@style/BottomNavText"
+                    android:text="Precio Base $500"
+                    android:layout_marginRight="10dp"/>
+
+                <Button
+                    android:id="@+id/btn_NextObjectOrderDetail"
+                    style="@style/BottomNavButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/purple_700"
+                    android:gravity="center"
+                    app:iconSize="30dp"
+                    android:text="Siguiente"
+                    app:cornerRadius="8dp"
+
+                    app:icon="@drawable/baseline_keyboard_arrow_right_24"
+                    app:iconGravity="end" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+
+</RelativeLayout>

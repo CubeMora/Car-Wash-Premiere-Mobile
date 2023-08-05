@@ -36,7 +36,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-            >
+                >
 
                 <com.google.android.material.imageview.ShapeableImageView
 
@@ -78,48 +78,27 @@
 
 
             <TextView
-                android:id="@+id/txt_ServicesObjectsDescription"
+                android:id="@+id/txt_CarParameterDescription"
                 android:layout_width="134dp"
                 android:layout_height="79dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:text="TextView"
                 app:layout_constraintStart_toEndOf="@+id/CardView_ServicesObjects"
-                app:layout_constraintTop_toBottomOf="@+id/txt_ServicesObjectsTitle" />
+                app:layout_constraintTop_toBottomOf="@+id/txt_TitleAutoDescription" />
 
             <TextView
-                android:id="@+id/txt_ServicesObjectsTitle"
+                android:id="@+id/txt_TitleAutoDescription"
                 android:layout_width="132dp"
                 android:layout_height="34dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="12dp"
                 android:fontFamily="sans-serif-black"
                 android:text="TextView"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:gravity="left|center"
+                android:textAppearance="@style/NavSubTitle"
                 app:layout_constraintStart_toEndOf="@+id/CardView_ServicesObjects"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/btn_ServicesCars"
-
-                style="@style/Widget.Material3.Button.Icon"
-                android:layout_width="43dp"
-                android:layout_height="50dp"
-                android:layout_gravity="start"
-                android:layout_marginEnd="15dp"
-                app:backgroundTint="@color/seed"
-
-
-                app:icon="@drawable/baseline_keyboard_arrow_right_24"
-                app:iconGravity="textEnd"
-                app:iconPadding="8dp"
-                app:iconSize="100px"
-                app:iconTint="@color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

@@ -1,6 +1,20 @@
 <resources>
     <string name="app_name">Car Wash Premiere Mobile</string>
-    <string name="title_activity_main_menu">MainMenu</string>
+    <string name="title_activity_main_menu">Menu</string>
+    <string name="title_activity_auto_menu">Automoviles</string>
+
+    <string name="title_activity_auto_parameters_description">Lavado por areas</string>
+    <string name="subtitle_activity_auto_menu">Opciones de lavado</string>
+
+    <string name="title_activity_object_parameters_description">Automóviles</string>
+    <string name="subtitle_activity_object_menu">Información del vehiculo</string>
+
+
+    <string name="subtitle_activity_auto_parameters">Parametros</string>
+    <string name="subtitle_activity_auto_description">Descripción</string>
+
+
+
     <string name="large_text">
         "Material is the metaphor.\n\n"
 

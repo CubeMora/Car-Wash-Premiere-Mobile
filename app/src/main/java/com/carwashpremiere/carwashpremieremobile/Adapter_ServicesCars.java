@@ -78,7 +78,7 @@ public class Adapter_ServicesCars extends RecyclerView.Adapter<Adapter_ServicesC
             txt_name = itemView.findViewById(R.id.txt_ServicesObjectsTitle);
             txt_description = itemView.findViewById(R.id.txt_ServicesObjectsDescription);
             img_service = itemView.findViewById(R.id.img_ServicesObjects);
-            btn_serviceCar = itemView.findViewById(R.id.btn_ServicesObjects);
+            btn_serviceCar = itemView.findViewById(R.id.btn_ServicesCars);
         }
     }
 }
