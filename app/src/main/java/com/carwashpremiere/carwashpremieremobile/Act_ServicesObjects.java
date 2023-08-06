@@ -5,9 +5,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -22,6 +25,7 @@ import java.util.List;
 
 public class Act_ServicesObjects extends AppCompatActivity {
     RecyclerView listServicesObjects;
+    Button btn_Back;
     Function_NetworkRequests networkRequests;
     Adapter_ServicesObjects adapter_servicesObjects;
     public static List<Model_ServicesObjects> mServicesObjectsList = new ArrayList<>();
@@ -32,8 +36,6 @@ public class Act_ServicesObjects extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getSupportActionBar().hide();
-
-
         setContentView(R.layout.activity_act_services_objects);
 
         listServicesObjects = findViewById(R.id.rList_Objects);
@@ -45,7 +47,23 @@ public class Act_ServicesObjects extends AppCompatActivity {
         listServicesObjects.setLayoutManager(layoutManager);
         listServicesObjects.setAdapter(adapter_servicesObjects);
         getServicesObjectsFromServer(networkRequests);
+        btn_Back = findViewById(R.id.btn_Back);
+
+
+        btn_Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    Intent intent;
+
+                    intent = new Intent(Act_ServicesObjects.this, Menu.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+
+            }
+        });
     }
+
 
     public void getServicesObjectsFromServer(Function_NetworkRequests networkRequests) {
         mServicesObjectsList.clear();

@@ -15,6 +15,9 @@
 
 
 
+    <string name="title_activity_ticket">Ticket</string>
+    <string name="subtitle_activity_ticket">Confirmación de compra</string>
+
     <string name="large_text">
         "Material is the metaphor.\n\n"
 

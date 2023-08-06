@@ -10,8 +10,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,11 +29,11 @@ public class Act_ObjectParameters extends AppCompatActivity {
     TextView txt_ObjectTitle;
     CardView cardView_ExtraServicesObject, cardView_DetailsObject, cardView_TitleObjectDetails, cardView_TitleObjectExtraServices;
     EditText eTxt_ObjectSize, eTxt_ObjectForm, eTxt_ObjectMaterial;
-    CheckBox chBox_ObjectSize, chBox_ObjectForm, chBox_ObjectMaterial;
     Button btn_Next;
 
-    String tempObjectSize, tempObjectForm, tempObjectMaterial;
-
+    String tempObjectSize = "N/A";
+    String tempObjectForm = "N/A";
+    String tempObjectMaterial = "N/A";
 
     Function_NetworkRequests networkRequests;
 
@@ -44,8 +42,6 @@ public class Act_ObjectParameters extends AppCompatActivity {
 
     List<Model_DetailsObject> mDetailsObjectsList = new ArrayList<>();
     List<Model_ExtraServicesObjects> mExtraServicesObjectsList = new ArrayList<>();
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +57,6 @@ public class Act_ObjectParameters extends AppCompatActivity {
 
         cardView_ExtraServicesObject.setVisibility(View.GONE);
         cardView_TitleObjectExtraServices.setVisibility(View.GONE);
-
 
         networkRequests = new Function_NetworkRequests(this);
 
@@ -85,12 +80,14 @@ public class Act_ObjectParameters extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-
                 Bundle bundle = new Bundle();
                 bundle.putString("objectTitle", txt_ObjectTitle.getText().toString());
-                bundle.putString("objectSize", eTxt_ObjectSize.getText().toString());
-                bundle.putString("objectForm", eTxt_ObjectForm.getText().toString());
-                bundle.putString("objectMaterial", eTxt_ObjectMaterial.getText().toString());
+
+                // Obtener valores de los campos de entrada, si están vacíos, establecer "N/A"
+                bundle.putString("objectSize", eTxt_ObjectSize.getText().toString().isEmpty() ? "N/A" : eTxt_ObjectSize.getText().toString());
+                bundle.putString("objectForm", eTxt_ObjectForm.getText().toString().isEmpty() ? "N/A" : eTxt_ObjectForm.getText().toString());
+                bundle.putString("objectMaterial", eTxt_ObjectMaterial.getText().toString().isEmpty() ? "N/A" : eTxt_ObjectMaterial.getText().toString());
+
                 bundle.putStringArrayList("extraServices", new ArrayList<>(adapterExtraServiceObject.getSelectedServices()));
                 bundle.putStringArrayList("details", new ArrayList<>(adapterDetailsObject.getSelectedDetails()));
                 bundle.putString("bundleType", "object");
@@ -100,65 +97,6 @@ public class Act_ObjectParameters extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        chBox_ObjectSize.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    // Deshabilitar EditText y establecer el texto predeterminado "N/A"
-                    eTxt_ObjectSize.setEnabled(false);
-                    // Guardar el valor actual del EditText en la variable auxiliar
-                    tempObjectSize = eTxt_ObjectSize.getText().toString();
-                    eTxt_ObjectSize.setText("N/A");
-
-                } else {
-
-
-                    // Habilitar EditText y mostrar el valor guardado
-                    eTxt_ObjectSize.setEnabled(true);
-                    eTxt_ObjectSize.setText(tempObjectSize);
-                }
-            }
-        });
-
-        chBox_ObjectForm.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-
-                    eTxt_ObjectForm.setEnabled(false);
-
-                    tempObjectForm = eTxt_ObjectForm.getText().toString();
-                    eTxt_ObjectForm.setText("N/A");
-                } else {
-
-
-                    eTxt_ObjectForm.setEnabled(true);
-                    eTxt_ObjectForm.setText(tempObjectForm);
-                }
-            }
-        });
-
-        chBox_ObjectMaterial.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-
-                    eTxt_ObjectMaterial.setEnabled(false);
-                    tempObjectMaterial = eTxt_ObjectMaterial.getText().toString();
-                    eTxt_ObjectMaterial.setText("N/A");
-                } else {
-
-                    eTxt_ObjectMaterial.setEnabled(true);
-                    eTxt_ObjectMaterial.setText(tempObjectMaterial);
-                }
-            }
-        });
-
-
-
-
-
     }
 
     void initUI() {
@@ -172,12 +110,7 @@ public class Act_ObjectParameters extends AppCompatActivity {
         eTxt_ObjectSize = findViewById(R.id.eTxt_ObjectSize);
         eTxt_ObjectForm = findViewById(R.id.eTxt_ObjectForm);
         eTxt_ObjectMaterial = findViewById(R.id.eTxt_ObjectMaterial);
-        chBox_ObjectSize = findViewById(R.id.chBox_ObjectSize);
-        chBox_ObjectForm = findViewById(R.id.chBox_ObjectForm);
-        chBox_ObjectMaterial = findViewById(R.id.chBox_ObjectMaterial);
         btn_Next = findViewById(R.id.btn_NextObjectOrderDetail);
-
-
     }
 
     public void getExtraServicesObjectsFromServer(Function_NetworkRequests networkRequests) {

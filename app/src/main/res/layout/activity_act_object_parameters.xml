@@ -184,22 +184,14 @@
                             android:layout_height="30dp"
                             android:fontFamily="sans-serif-black"
                             android:text="Especificaciones"
+                            style="@style/SubTitle"
+
                             android:textAlignment="textStart"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Large"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="0.533" />
 
-                        <TextView
-                            android:id="@+id/shp_TitulosSpecificationObject"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/circle"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </LinearLayout>
@@ -211,51 +203,47 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="0dp"
                 app:cardBackgroundColor="#FFFFFF"
-                app:cardElevation="3dp">
+                >
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+
 
                     <TableLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:id="@+id/tableLayout">
+                        android:id="@+id/tableLayout"
+                        >
 
                         <TableRow
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="55dp"
+                            android:layout_gravity="center"
+                            android:paddingHorizontal="16dp"
                             tools:layout_conversion_absoluteHeight="58dp"
                             tools:layout_conversion_absoluteWidth="393dp"
                             tools:layout_editor_absoluteX="0dp"
                             tools:layout_editor_absoluteY="297dp">
 
-                            <View
-                                android:id="@+id/view4"
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:background="@drawable/circle_yellow"
-                                android:visibility="gone" />
 
-                            <EditText
-                                android:id="@+id/eTxt_ObjectSize"
-                                android:layout_width="match_parent"
-                                android:layout_height="50dp"
-                                android:ems="10"
-                                android:hint="Tamaño (cm)"
-                                android:inputType="numberDecimal" />
-
-                            <Space
-                                android:layout_width="70dp"
-                                android:layout_height="wrap_content" />
-
-                            <CheckBox
-                                android:id="@+id/chBox_ObjectSize"
-                                android:layout_width="wrap_content"
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                app:boxBackgroundMode="outline"
+                                app:endIconMode="clear_text"
+                                android:layout_width="0dp"
+                                android:layout_weight="100"
                                 android:layout_height="wrap_content"
-                                android:text="N/A"
+                                android:hint="Tamaño (cm)"
 
-                                />
+                                >
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/eTxt_ObjectSize"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+
+                                    />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
 
 
                         </TableRow>
@@ -266,32 +254,31 @@
                             tools:layout_conversion_absoluteHeight="58dp"
                             tools:layout_editor_absoluteY="355dp"
                             tools:layout_editor_absoluteX="0dp"
-                            tools:layout_conversion_absoluteWidth="393dp">
+                            tools:layout_conversion_absoluteWidth="393dp"
+                            android:paddingHorizontal="16dp"
 
-                            <View
-                                android:id="@+id/view7"
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:foreground="@android:drawable/btn_dialog"
-                                android:visibility="gone" />
+                            >
 
-                            <EditText
-                                android:id="@+id/eTxt_ObjectForm"
-                                android:layout_width="wrap_content"
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                app:boxBackgroundMode="outline"
+                                app:endIconMode="clear_text"
+                                android:layout_width="0dp"
+                                android:layout_weight="70"
                                 android:layout_height="wrap_content"
-                                android:ems="10"
                                 android:hint="Forma"
-                                android:inputType="textPersonName" />
 
-                            <Space
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" />
+                                >
 
-                            <CheckBox
-                                android:id="@+id/chBox_ObjectForm"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="N/A" />
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/eTxt_ObjectForm"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+
+                                    />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
                         </TableRow>
 
                         <TableRow
@@ -300,32 +287,31 @@
                             tools:layout_conversion_absoluteHeight="58dp"
                             tools:layout_editor_absoluteY="413dp"
                             tools:layout_editor_absoluteX="0dp"
-                            tools:layout_conversion_absoluteWidth="393dp">
+                            tools:layout_conversion_absoluteWidth="393dp"
+                            android:paddingHorizontal="16dp"
+                            >
 
-                            <View
-                                android:id="@+id/view8"
-                                android:layout_width="50dp"
-                                android:layout_height="50dp"
-                                android:foreground="@android:drawable/btn_dialog"
-                                android:visibility="gone" />
-
-                            <EditText
-                                android:id="@+id/eTxt_ObjectMaterial"
-                                android:layout_width="wrap_content"
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                                app:boxBackgroundMode="outline"
+                                app:endIconMode="clear_text"
+                                android:layout_width="0dp"
+                                android:layout_weight="70"
                                 android:layout_height="wrap_content"
-                                android:ems="10"
-                                android:hint="Material"
-                                android:inputType="textPersonName" />
+                                android:hint="Forma"
+                                app:helperText="Campos no obligatorios"
 
-                            <Space
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" />
+                                >
 
-                            <CheckBox
-                                android:id="@+id/chBox_ObjectMaterial"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="N/A" />
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/eTxt_ObjectMaterial"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+
+                                    />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
                         </TableRow>
 
                     </TableLayout>
@@ -336,7 +322,6 @@
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                </com.google.android.material.textfield.TextInputLayout>
 
             </androidx.cardview.widget.CardView>
 
@@ -371,22 +356,14 @@
                             android:layout_height="30dp"
                             android:fontFamily="sans-serif-black"
                             android:text="Servicios extra"
+                            style="@style/SubTitle"
+
                             android:textAlignment="textStart"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Large"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="0.533" />
 
-                        <TextView
-                            android:id="@+id/shp_TitulosObjectService"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/circle"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </LinearLayout>
@@ -436,22 +413,14 @@
                             android:layout_height="30dp"
                             android:fontFamily="sans-serif-black"
                             android:text="Detalles"
+                            style="@style/SubTitle"
+
                             android:textAlignment="textStart"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Large"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintVertical_bias="0.533" />
 
-                        <TextView
-                            android:id="@+id/shp_TitulosObjectDetails"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/circle"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </LinearLayout>
@@ -499,6 +468,7 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="left"
                     android:gravity="center"
+                    android:visibility="gone"
                     style="@style/BottomNavText"
                     android:text="Precio Base $500"
                     android:layout_marginRight="10dp"/>

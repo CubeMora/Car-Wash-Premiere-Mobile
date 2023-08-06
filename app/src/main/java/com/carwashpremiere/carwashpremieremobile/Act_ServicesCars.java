@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -24,6 +25,8 @@ import java.util.List;
 public class Act_ServicesCars extends AppCompatActivity {
     FloatingActionButton fltBtn_Back;
     RecyclerView listServicesCars;
+
+    Button btn_Back;
     Function_NetworkRequests networkRequests;
     Adapter_ServicesCars adapter_servicesCars;
     public static List<Model_ServicesCars> mServicesCarsList = new ArrayList<>();
@@ -45,6 +48,20 @@ public class Act_ServicesCars extends AppCompatActivity {
         listServicesCars.setLayoutManager(layoutManager);
         listServicesCars.setAdapter(adapter_servicesCars);
         getServicesCarsFromServer(networkRequests);
+        btn_Back = findViewById(R.id.btn_Back);
+
+        btn_Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent;
+
+                intent = new Intent(Act_ServicesCars.this, Menu.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+                finish();
+
+            }
+        });
 
     }
 

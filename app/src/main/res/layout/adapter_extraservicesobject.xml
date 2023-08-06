@@ -9,30 +9,34 @@
     android:layout_marginEnd="15dp"
     android:layout_marginBottom="10dp"
     android:paddingRight="10dp"
+    android:backgroundTint="@color/white"
+    android:elevation="5dp"
     android:background="@drawable/shape_background_check_detail">
 
     <TextView
         android:id="@+id/txt_AdapterObjectDetail"
+        style="@style/CheckBoxText"
         android:layout_width="232dp"
         android:layout_height="58dp"
         android:fontFamily="sans-serif-medium"
-        android:gravity="right|center"
+        android:gravity="center_vertical"
         android:text="TextView"
-        style="@style/CheckBoxText"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/txt_ExtraServiceObjectPrice"
+        app:layout_constraintStart_toStartOf="@+id/chBox_AdapterObjectDetail"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txt_ExtraServiceObjectPrice"
-        style="@style/CheckBoxText"
-        android:layout_width="93dp"
-        android:layout_height="37dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:text="TextView"
+        android:visibility="gone"
+        android:textColor="@color/seed"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/chBox_AdapterObjectDetail"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <CheckBox

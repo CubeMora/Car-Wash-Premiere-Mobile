@@ -52,6 +52,13 @@
         <!-- Agrega aquí otros atributos personalizados para los TextViews -->
     </style>
 
+    <style name="CardText">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/black</item>
+        <!-- Agrega aquí otros atributos personalizados para los TextViews -->
+    </style>
+
     <style name="CardImageMenu">
         <item name="cornerSizeBottomRight">28dp</item>
         <item name="cornerSizeTopRight">28dp</item>
