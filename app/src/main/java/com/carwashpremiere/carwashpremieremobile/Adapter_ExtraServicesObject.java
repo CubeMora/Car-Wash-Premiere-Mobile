@@ -12,6 +12,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.carwashpremiere.carwashpremieremobile.Model_ExtraServicesObjects;
+import com.carwashpremiere.carwashpremieremobile.R;
+
 import java.util.ArrayList;
 import java.util.List;
 

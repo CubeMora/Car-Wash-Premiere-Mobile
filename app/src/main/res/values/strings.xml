@@ -3,6 +3,10 @@
     <string name="title_activity_main_menu">Menu</string>
     <string name="title_activity_auto_menu">Automoviles</string>
 
+    <string name="title_activity_admin">Panel Administrador</string>
+    <string name="subtitle_activity_admin">Vista Administrador</string>
+
+
     <string name="title_activity_auto_parameters_description">Lavado por areas</string>
     <string name="subtitle_activity_auto_menu">Opciones de lavado</string>
 
@@ -12,7 +16,6 @@
 
     <string name="subtitle_activity_auto_parameters">Parametros</string>
     <string name="subtitle_activity_auto_description">Descripción</string>
-
 
 
     <string name="title_activity_ticket">Ticket</string>
@@ -110,4 +113,8 @@
     <string name="Testaction_settings">Settings</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="com_auth0_client_id">FYnBK2HKXZorCkO8kjQJHFsIbFzOr9S1</string>
+    <string name="com_auth0_domain">dev-ap8ggrxa3835inf7.us.auth0.com</string>
+    <string name="com_auth0_scheme">demo</string>
 </resources>

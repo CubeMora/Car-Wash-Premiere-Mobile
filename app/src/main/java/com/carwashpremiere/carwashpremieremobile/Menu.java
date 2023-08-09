@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -19,6 +21,7 @@ import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONArray;
@@ -34,6 +37,8 @@ public class Menu extends AppCompatActivity {
     Button btn_Services;
     ImageButton imgBtn_Atajo1;
     ProgressBar bar_loadingMenu;
+    BottomNavigationView menuBottomNav;
+
     private RecyclerView listCategory, listShortcuts;
 
     private static Adapter_Category adapterCategory;
@@ -76,13 +81,32 @@ public class Menu extends AppCompatActivity {
         getShortcutsFromServer(networkRequests);
 
 
+        menuBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                int itemId = item.getItemId();
+
+                if (itemId == R.id.user) {
+                    // Navegar a la pantalla deseada (pantalla con ID "user")
+                    Intent intent = new Intent(Menu.this, Act_AdminCrud.class); // Reemplaza "PantallaUsuario" con el nombre de tu actividad de destino
+                    startActivity(intent);
+                    return true;
+                }
+                // Agrega más condiciones para otros elementos del menú si es necesario
+                // else if (itemId == R.id.otro_elemento) { ... }
+
+                return false;
+            }
+        });
+
+
     }
 
     private void initUI(){
         listCategory = findViewById(R.id.rList_Category);
         imgBtn_Atajo1 = findViewById(R.id.imgBtn_Atajo1);
         listShortcuts = findViewById(R.id.rList_Shortcuts);
-        
+        menuBottomNav = findViewById(R.id.menuBottomNav);
 
 
     }

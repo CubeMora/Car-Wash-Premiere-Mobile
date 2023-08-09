@@ -31,7 +31,7 @@ public class Act_ObjectParameters extends AppCompatActivity {
     TextView txt_ObjectTitle;
     CardView cardView_ExtraServicesObject, cardView_DetailsObject, cardView_TitleObjectDetails, cardView_TitleObjectExtraServices;
     EditText eTxt_ObjectSize, eTxt_ObjectForm, eTxt_ObjectMaterial;
-    Button btn_Next;
+    Button btn_Next, btn_Back;
 
     String tempObjectSize = "N/A";
     String tempObjectForm = "N/A";
@@ -115,6 +115,7 @@ public class Act_ObjectParameters extends AppCompatActivity {
 
         btn_Next.setOnClickListener(new View.OnClickListener() {
 
+
             @Override
             public void onClick(View v) {
                 Bundle bundle = new Bundle();
@@ -134,7 +135,19 @@ public class Act_ObjectParameters extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        btn_Back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                Intent intent;
+
+                intent = new Intent(Act_ObjectParameters.this, Act_ServicesObjects.class);
+
+                setResult(RESULT_OK, intent);
+                finish();
+
+            }
+        });
     }
 
     void initUI() {
@@ -149,6 +162,8 @@ public class Act_ObjectParameters extends AppCompatActivity {
         eTxt_ObjectForm = findViewById(R.id.eTxt_ObjectForm);
         eTxt_ObjectMaterial = findViewById(R.id.eTxt_ObjectMaterial);
         btn_Next = findViewById(R.id.btn_NextObjectOrderDetail);
+        btn_Back = findViewById(R.id.btn_Back);
+
     }
 
     public void getExtraServicesObjectsFromServer(Function_NetworkRequests networkRequests) {

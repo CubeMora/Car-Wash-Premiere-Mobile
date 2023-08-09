@@ -2,21 +2,22 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
+    android:background="@android:color/transparent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+
+
+    >
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_Main"
-
         android:layout_height="140dp"
         android:layout_width="match_parent">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
-            app:contentScrim="@android:color/holo_orange_dark"
+            android:background="#E6EBFA"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:layout_scrollInterpolator="@android:anim/decelerate_interpolator"
 
@@ -25,22 +26,29 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="10dp"
+                android:background="@android:color/transparent"
+                app:cardBackgroundColor="#00FFFFFF"
+                app:strokeColor="#00FFFFFF"
+                android:outlineSpotShadowColor="#00FFFFFF"
+                android:outlineAmbientShadowColor="#00FFFFFF"
+                >
 
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
-                    app:cardBackgroundColor="#00FFFFFF"
+                    app:cardBackgroundColor="@android:color/transparent"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent">
+                    app:layout_constraintStart_toStartOf="parent"
+                    >
 
                     <ImageView
                         android:id="@+id/imageView"
                         android:layout_width="match_parent"
                         android:layout_height="80dp"
-                        android:layout_marginHorizontal="10dp"
                         android:src="@drawable/shape_header" />
 
                     <TextView
@@ -50,7 +58,7 @@
                         android:layout_height="match_parent"
                         android:fontFamily="sans-serif-condensed"
                         android:gravity="center"
-                        android:text="@string/title_activity_main_menu"
+                        android:text="@string/title_activity_admin"
                         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -110,10 +118,10 @@
 
                     <TextView
                         android:id="@+id/txt_TitulosOrderDetailService"
-                        android:layout_width="98dp"
-                        android:layout_height="30dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:fontFamily="sans-serif-black"
-                        android:text="Atajos"
+                        android:text="Categorías"
                         style="@style/SubTitle"
 
                         android:textAlignment="textStart"
@@ -137,7 +145,7 @@
                 app:cardCornerRadius="8dp">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rList_Shortcuts"
+                    android:id="@+id/rList_Category"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/white"
@@ -146,72 +154,8 @@
             </androidx.cardview.widget.CardView>
 
 
-            <LinearLayout
-                android:id="@+id/linLay_TitulosCategory"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="16dp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/txt_Category"
-                        android:layout_width="wrap_content"
-                        android:layout_height="30dp"
-                        android:fontFamily="sans-serif-black"
-                        android:text="Categorías"
-                        style="@style/SubTitle"
-                        android:textAlignment="textStart"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.533" />
 
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </LinearLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rList_Category"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
-                android:scrollbars="horizontal" />
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp">
-
-                <View
-                    android:id="@+id/divider"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="?android:attr/listDivider" />
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:background="@color/white"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/textView3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="CarWash Premiere Gasoservicios SA de CV"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
@@ -221,6 +165,7 @@
         android:layout_height="60dp"
         app:menu="@menu/menu_bar"
         android:background="@drawable/shape_bottom_nav_menu"
+        app:backgroundTint="@color/seed"
         app:itemTextColor="@drawable/menu_bar_select"
         app:itemIconTint="@drawable/menu_bar_select"
 
