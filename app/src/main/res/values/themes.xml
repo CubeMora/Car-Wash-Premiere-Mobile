@@ -13,6 +13,8 @@
     <attr name="harmonizeSecondaryVariant" format="boolean" />
 
     <style name="Theme.CarWashPremiereMobile" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+
++
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>

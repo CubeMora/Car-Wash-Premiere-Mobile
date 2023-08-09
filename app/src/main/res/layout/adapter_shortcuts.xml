@@ -23,6 +23,7 @@
         />
 
     <androidx.cardview.widget.CardView
+
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         app:cardBackgroundColor="#00FFFFFF"
@@ -30,10 +31,11 @@
         android:outlineSpotShadowColor="#00FFFFFF"
         android:outlineAmbientShadowColor="#00FFFFFF"
         android:outlineProvider="none"
-
         app:layout_constraintBottom_toBottomOf="@+id/btn_Shortcuts"
         app:layout_constraintEnd_toEndOf="@+id/btn_Shortcuts"
-        app:layout_constraintTop_toTopOf="@+id/btn_Shortcuts">
+        app:layout_constraintTop_toTopOf="@+id/btn_Shortcuts"
+
+    >
 
         <com.google.android.material.imageview.ShapeableImageView
 
@@ -47,14 +49,13 @@
             android:layout_marginVertical="10dp"
             android:paddingVertical="3dp"
             android:paddingRight="2dp"
-
-
-
             android:scaleType="centerCrop"
             app:shapeAppearanceOverlay="@style/CardImageShortcut"
             app:strokeColor="@android:color/transparent"
             app:strokeWidth="0dp"
-            tools:layout_editor_absoluteX="223dp" />
+            tools:layout_editor_absoluteX="223dp"
+
+        />
 
         <ImageView
             android:id="@+id/img_ShortcutsIco"

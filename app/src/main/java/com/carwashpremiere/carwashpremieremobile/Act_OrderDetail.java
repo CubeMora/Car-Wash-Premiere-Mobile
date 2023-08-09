@@ -2,16 +2,25 @@ package com.carwashpremiere.carwashpremieremobile;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.annotation.NonNull;
 
-import android.content.Intent;
-import android.net.Uri;
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.Intent;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -21,6 +30,23 @@ import com.google.android.material.chip.ChipGroup;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.itextpdf.barcodes.BarcodeQRCode;
+import com.itextpdf.io.image.ImageData;
+import com.itextpdf.io.image.ImageDataFactory;
+import com.itextpdf.io.source.ByteArrayOutputStream;
+import com.itextpdf.kernel.colors.ColorConstants;
+import com.itextpdf.kernel.font.PdfFont;
+import com.itextpdf.kernel.font.PdfFontFactory;
+import com.itextpdf.kernel.geom.PageSize;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Image;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.property.TextAlignment;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Act_OrderDetail extends AppCompatActivity {
@@ -38,6 +64,8 @@ public class Act_OrderDetail extends AppCompatActivity {
 
     TextView txt_TotalPrice, txt_ServiceTitle, txt_objectDetail, txt_ExtraServices, txt_Details, txt_Specifications;
 
+    private String messageContent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,15 +81,11 @@ public class Act_OrderDetail extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 hasClickedWA = true;
-                String message = "";
                 StringBuilder allChipDetailsTexts = new StringBuilder();
                 StringBuilder allChipServicesTexts = new StringBuilder();
 
-                getPhoneNumberFromServer(networkRequests);
-
                 for (int i = 0; i < ServiceChipGrout.getChildCount(); i++) {
                     View child = ServiceChipGrout.getChildAt(i);
-
                     // Verificar que el hijo sea un Chip
                     if (child instanceof Chip) {
                         Chip chip = (Chip) child;
@@ -73,7 +97,6 @@ public class Act_OrderDetail extends AppCompatActivity {
 
                 for (int i = 0; i < ExtraDetailsChipGrout.getChildCount(); i++) {
                     View child = ExtraDetailsChipGrout.getChildAt(i);
-
                     // Verificar que el hijo sea un Chip
                     if (child instanceof Chip) {
                         Chip chip = (Chip) child;
@@ -86,34 +109,47 @@ public class Act_OrderDetail extends AppCompatActivity {
                 String allChipTextsServiceString = allChipServicesTexts.toString();
                 String allChipTextsDetailsString = allChipDetailsTexts.toString();
 
+                String message = "";
                 if (bundleType.equals("car")) {
                     String service_title = txt_ServiceTitle.getText().toString();
                     String car_type = txt_objectDetail.getText().toString();
 
-                    message = "Hola, quisiera solicitar una cotización para el servicio de " + service_title
+                    message = "Cotización para el servicio de " + service_title
                             + " con el siguiente detalle: \n\n"
                             + "Tipo de vehículo: " + car_type + "\n"
                             + "Servicios extra: " + allChipTextsServiceString + "\n"
                             + "Detalles adicionales: " + allChipDetailsTexts + "\n\n"
                             + "Precio total: " + String.format("$%.2f", bundle.getDouble("totalPrice")) + "\n\n"
-                            + "¿Podrían proporcionarme una cotización para este servicio? Gracias.";
+                           ;
+
+                    BarcodeQRCode qrCode = new BarcodeQRCode("Cotización para el servicio de " + service_title);
+
+
                 } else if (bundleType.equals("object")) {
                     String object_title = bundle.getString("objectTitle");
                     String object_specifications = txt_Specifications.getText().toString();
 
-                    message = "Hola, quisiera solicitar una cotización para el objeto:  " + object_title + "." +
-                            "\n\n" + "Con las siguientes especificaciones: " + object_specifications + "\n\n"
-                            + "Servicios extra: " + allChipTextsServiceString + "\n\n"
-                            + "Detalles adicionales: " + allChipDetailsTexts + "\n\n"
+                    message = "Cotización para el objeto:  " + object_title + "." +
+                            "\n\n" + "Con las siguientes especificaciones: " + object_specifications + "\n\n" +
+                            "Servicios extra: " + allChipTextsServiceString + "\n\n" +
+                            "Detalles adicionales: " + allChipDetailsTexts + "\n\n"
                             + "Precio total: " + String.format("$%.2f", bundle.getDouble("totalPrice")) + "\n\n"
-                            + "¿Podrían proporcionarme una cotización para este objeto? Gracias.";
+                            ;
                 }
 
-                String url = "https://api.whatsapp.com/send?phone=" + phoneNumberTemp + "&text=" + message;
-                Log.e("URL", url);
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(url));
-                startActivity(intent);
+                // Store the message content to use later in onRequestPermissionsResult
+                messageContent = message;
+
+                // Check if the storage write permission is granted
+                if (ContextCompat.checkSelfPermission(Act_OrderDetail.this,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                    // Permission granted, generate the PDF file
+                    generatePdfFile(messageContent);
+                } else {
+                    // Request the storage write permission
+                    ActivityCompat.requestPermissions(Act_OrderDetail.this,
+                            new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                }
             }
         });
 
@@ -148,6 +184,65 @@ public class Act_OrderDetail extends AppCompatActivity {
         });
     }
 
+    private void generatePdfFile(String content) {
+        String fileName = "cotizacion.pdf";
+        String folderPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
+        String filePath = folderPath + File.separator + fileName;
+
+        try {
+            // Create a PDF document
+            PdfWriter writer = new PdfWriter(filePath);
+            PdfDocument pdfDocument = new PdfDocument(writer);
+            Document document = new Document(pdfDocument);
+
+            pdfDocument.setDefaultPageSize(PageSize.A6);
+
+            Drawable d = getDrawable(R.drawable.banner);
+            Bitmap bitmap = ((BitmapDrawable)d).getBitmap();
+
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            byte[] bitmapData = stream.toByteArray();
+
+            ImageData imageData = ImageDataFactory.create(bitmapData);
+
+            Image image = new Image(imageData);
+
+            // Add content to the PDF document
+            Paragraph paragraph = new Paragraph(content);
+            paragraph.setTextAlignment(TextAlignment.LEFT);
+
+
+            document.add(image);
+
+            document.add(paragraph);
+
+
+            // Close the document
+            document.close();
+
+            Toast.makeText(this, "PDF file created and saved in Downloads folder.", Toast.LENGTH_SHORT).show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1) {
+            // Check if the permission is granted
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted, generate the PDF file
+                generatePdfFile(messageContent);
+            } else {
+                // Permission denied, show a toast or handle accordingly
+                Toast.makeText(this, "Storage write permission denied.", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
     public void getPhoneNumberFromServer(Function_NetworkRequests networkRequests) {
         phoneNumber = "";
         networkRequests.getPhone(new Response.Listener<String>() {
@@ -173,7 +268,6 @@ public class Act_OrderDetail extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         if (hasClickedWA) {
-            btn_WA.setVisibility(View.GONE);
             btn_Next.setVisibility(View.VISIBLE);
         } else {
             btn_WA.setVisibility(View.VISIBLE);
@@ -190,6 +284,7 @@ public class Act_OrderDetail extends AppCompatActivity {
         txt_ServiceTitle = findViewById(R.id.txt_ServiceDescription);
         txt_objectDetail = findViewById(R.id.txt_ObjectDetail);
         txt_Specifications = findViewById(R.id.txt_ObjectSpecifications);
+
         btn_Next = findViewById(R.id.btn_MainMenu);
         cardView_CarService = findViewById(R.id.card_ServicesSpecifications);
         cardView_TitleCarService = findViewById(R.id.card_TitulosParameterCar);
@@ -246,4 +341,7 @@ public class Act_OrderDetail extends AppCompatActivity {
             }
         }
     }
+
+
+
 }

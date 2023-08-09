@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -76,6 +78,41 @@ public class Act_ObjectParameters extends AppCompatActivity {
         rList_DetailsObject.setAdapter(adapterDetailsObject);
         getDetailsObjectsFromServer(networkRequests);
 
+        // Agregar un TextWatcher al campo de tamaño
+        eTxt_ObjectSize.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                // Verificar si el campo está vacío
+                if (editable.toString().isEmpty()) {
+                    return;
+                }
+
+                try {
+                    // Obtener el valor ingresado como un entero
+                    int size = Integer.parseInt(editable.toString());
+
+                    // Verificar si el valor excede el límite de 200
+                    if (size > 200) {
+                        // Restablecer el valor del campo a 200
+                        eTxt_ObjectSize.setText("200");
+                        // Mover el cursor al final del texto
+                        eTxt_ObjectSize.setSelection(eTxt_ObjectSize.getText().length());
+                    }
+                } catch (NumberFormatException e) {
+                    // Mostrar un mensaje de error cuando se ingresa un valor no numérico
+                    Toast.makeText(Act_ObjectParameters.this, "Solo se aceptan valores numéricos", Toast.LENGTH_SHORT).show();
+                    // Restablecer el campo a su valor anterior
+                    eTxt_ObjectSize.setText("");
+                }
+            }
+        });
+
         btn_Next.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -97,6 +134,7 @@ public class Act_ObjectParameters extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
 
     void initUI() {
@@ -169,7 +207,6 @@ public class Act_ObjectParameters extends AppCompatActivity {
 
                         int id = jsonObject.getInt("id");
                         String title = jsonObject.getString("title");
-
 
                         mDetailsObjectsList.add(new Model_DetailsObject(id, title));
                     }

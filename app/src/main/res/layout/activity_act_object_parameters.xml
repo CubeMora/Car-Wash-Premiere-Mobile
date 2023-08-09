@@ -232,6 +232,7 @@
                                 android:layout_weight="100"
                                 android:layout_height="wrap_content"
                                 android:hint="Tamaño (cm)"
+                                android:inputType="number"
 
                                 >
 
@@ -298,7 +299,7 @@
                                 android:layout_width="0dp"
                                 android:layout_weight="70"
                                 android:layout_height="wrap_content"
-                                android:hint="Forma"
+                                android:hint="Material"
                                 app:helperText="Campos no obligatorios"
 
                                 >
