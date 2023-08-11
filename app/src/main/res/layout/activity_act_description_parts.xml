@@ -5,7 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+<<<<<<< HEAD
     tools:context=".activities.Act_description_parts">
+=======
+    tools:context=".Act_description_parts">
+>>>>>>> f2386c0dd8e34f6ccc6ba8eb05f22afd74164ef5
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/view2"

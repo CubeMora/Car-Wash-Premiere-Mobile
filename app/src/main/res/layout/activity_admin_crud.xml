@@ -5,7 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E6EBFA"
+<<<<<<< HEAD
     tools:context=".activities.Act_OrderDetail">
+=======
+    tools:context=".Act_OrderDetail">
+>>>>>>> f2386c0dd8e34f6ccc6ba8eb05f22afd74164ef5
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_Main"
@@ -24,9 +28,16 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
+<<<<<<< HEAD
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="10dp"
                 android:background="@android:color/transparent"
+=======
+                android:layout_height="80dp"
+                android:paddingHorizontal="10dp"
+                android:layout_marginHorizontal="10dp"
+                android:background="@drawable/shape_header"
+>>>>>>> f2386c0dd8e34f6ccc6ba8eb05f22afd74164ef5
                 app:cardBackgroundColor="#00FFFFFF"
                 app:strokeColor="#00FFFFFF"
                 android:outlineSpotShadowColor="#00FFFFFF"
@@ -34,6 +45,7 @@
                 >
 
 
+<<<<<<< HEAD
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
@@ -63,10 +75,38 @@
                         app:layout_constraintTop_toTopOf="@+id/app_bar_image" />
                 </androidx.cardview.widget.CardView>
 
+=======
+                <TextView
+                    android:id="@+id/textView4"
+                    style="@style/NavTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:fontFamily="sans-serif-condensed"
+                    android:gravity="center"
+                    android:text="@string/title_activity_admin"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    />
+>>>>>>> f2386c0dd8e34f6ccc6ba8eb05f22afd74164ef5
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+<<<<<<< HEAD
+=======
+            <ImageView
+                android:id="@+id/TopCardView"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="bottom"
+                android:layout_marginHorizontal="10dp"
+                android:layout_below="@+id/appbar_Main"
+                android:background="@drawable/shape_background"
+
+                />
+
+>>>>>>> f2386c0dd8e34f6ccc6ba8eb05f22afd74164ef5
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 

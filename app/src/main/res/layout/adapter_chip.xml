@@ -5,7 +5,11 @@
     app:chipBackgroundColor="@color/seed"
     app:closeIconTint="@color/white"
     app:chipCornerRadius="5dp"
+<<<<<<< HEAD
     app:closeIcon="@drawable/baseline_close_24"
+=======
+    app:closeIcon="none"
+>>>>>>> f2386c0dd8e34f6ccc6ba8eb05f22afd74164ef5
     android:textColor="@color/white"
     android:layout_height="wrap_content"
     android:layout_width="wrap_content"

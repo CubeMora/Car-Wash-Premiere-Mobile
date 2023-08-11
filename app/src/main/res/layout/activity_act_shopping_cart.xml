@@ -4,7 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+<<<<<<< HEAD
     tools:context=".old.Act_ShoppingCart">
+=======
+    tools:context=".Act_ShoppingCart">
+>>>>>>> f2386c0dd8e34f6ccc6ba8eb05f22afd74164ef5
 
     <View
         android:id="@+id/view"

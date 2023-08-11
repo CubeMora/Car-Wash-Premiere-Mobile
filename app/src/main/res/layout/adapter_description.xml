@@ -75,6 +75,7 @@
             </androidx.cardview.widget.CardView>
 
 
+<<<<<<< HEAD
 
 
             <TextView
@@ -96,6 +97,18 @@
                 android:fontFamily="sans-serif-black"
                 android:text="TextView"
                 android:gravity="left|center"
+=======
+            <TextView
+                android:id="@+id/txt_TitleAutoDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="170dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="12dp"
+                android:fontFamily="sans-serif-black"
+                android:gravity="left|center"
+                android:text="TextView"
+>>>>>>> f2386c0dd8e34f6ccc6ba8eb05f22afd74164ef5
                 android:textAppearance="@style/NavSubTitle"
                 app:layout_constraintStart_toEndOf="@+id/CardView_ServicesObjects"
                 app:layout_constraintTop_toTopOf="parent" />
