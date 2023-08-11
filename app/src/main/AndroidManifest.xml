@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" >
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -16,53 +16,52 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CarWashPremiereMobile"
         android:usesCleartextTraffic="true"
-        tools:targetApi="31" >
+        tools:targetApi="31">
         <activity
-            android:name=".Act_FirstScreen"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:name=".activities.Act_testCRUD"
+            android:exported="false" />
+        <activity
+            android:name=".activities.Act_FirstScreen"
+            android:exported="false">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".Test"
             android:exported="false" />
         <activity
-            android:name=".Act_ObjectParameters"
+            android:name=".activities.Act_ObjectParameters"
             android:exported="false" />
         <activity
-            android:name=".Act_ServicesObjects"
+            android:name=".activities.Act_ServicesObjects"
             android:exported="false" />
         <activity
-            android:name=".Act_ShoppingCart"
+            android:name=".old.Act_ShoppingCart"
             android:exported="false" />
         <activity
-            android:name=".Act_OrderDetail"
+            android:name=".activities.Act_OrderDetail"
             android:exported="false" />
         <activity
-            android:name=".Act_CarParameters"
+            android:name=".activities.Act_CarParameters"
             android:exported="false" />
         <activity
-            android:name=".Act_description_parts"
+            android:name=".activities.Act_description_parts"
             android:exported="false" />
         <activity
-            android:name=".Act_DescriptionCars"
+            android:name=".activities.Act_DescriptionCars"
             android:exported="false" />
         <activity
-            android:name=".Act_ServicesCars"
+            android:name=".activities.Act_ServicesCars"
             android:exported="false" />
         <activity
-            android:name=".Act_AdminCrud"
+            android:name=".activities.Act_AdminCrud"
             android:exported="false" />
         <activity
             android:name=".whatsapp_test"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".Menu"
-            android:exported="true" >
+            android:name=".activities.Menu"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

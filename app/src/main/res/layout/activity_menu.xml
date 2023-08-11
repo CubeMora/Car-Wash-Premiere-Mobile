@@ -63,7 +63,7 @@ android:background="@color/white"
                        />
 
                     <TextView
-                        android:id="@+id/textView4"
+                        android:id="@+id/txt_serviceCarTitle"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:fontFamily="sans-serif-condensed"

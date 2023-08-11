@@ -52,7 +52,7 @@
                         android:src="@drawable/shape_header" />
 
                     <TextView
-                        android:id="@+id/textView4"
+                        android:id="@+id/txt_serviceCarTitle"
                         style="@style/NavTitle"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

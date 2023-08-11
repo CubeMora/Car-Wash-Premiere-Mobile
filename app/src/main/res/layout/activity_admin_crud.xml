@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E6EBFA"
-    tools:context=".Act_OrderDetail">
+    tools:context=".activities.Act_OrderDetail">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_Main"
@@ -50,7 +50,7 @@
                         android:src="@drawable/shape_header" />
 
                     <TextView
-                        android:id="@+id/textView4"
+                        android:id="@+id/txt_serviceCarTitle"
                         style="@style/NavTitle"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

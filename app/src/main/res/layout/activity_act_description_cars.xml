@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Act_DescriptionCars">
+    tools:context=".activities.Act_DescriptionCars">
 
 
 
@@ -90,13 +90,13 @@
                         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
                     <TextView
-                        android:id="@+id/textView4"
+                        android:id="@+id/txt_serviceCarTitle"
+                        style="@style/NavTitle"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:fontFamily="sans-serif-condensed"
                         android:gravity="center"
-                        style="@style/NavTitle"
-                        android:text="@string/title_activity_auto_parameters_description"
+                        android:text="x"
                         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -230,6 +230,7 @@
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
+
             <LinearLayout
                 android:id="@+id/linLay_TitulosExtraService"
                 android:layout_width="match_parent"
@@ -248,11 +249,11 @@
 
                     <TextView
                         android:id="@+id/txt_TitulosExtraService"
+                        style="@style/SubTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:fontFamily="sans-serif-black"
                         android:text="Tipo de auto"
-                        style="@style/SubTitle"
 
                         android:textAlignment="textStart"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -263,47 +264,14 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/card_serviceCarType"
-                    android:layout_width="0dp"
-                    android:layout_height="150dp"
-                    android:layout_marginTop="16dp"
-                    app:cardBackgroundColor="#FFFFFF"
-                    app:cardCornerRadius="2dp"
-                    app:cardElevation="5dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/linLay_TitulosExtraService">
-
-                </androidx.cardview.widget.CardView>
-
             </LinearLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                app:boxBackgroundMode="outline"
-                android:layout_height="60dp"
+            <Spinner
+                android:id="@+id/sp_CarType"
                 android:layout_width="match_parent"
-                android:hint="select"
-                android:layout_margin="16dp"
-
-
-
-
-
-                >
-
-                <AutoCompleteTextView
-                    android:id="@+id/autoComplete_CarType"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:inputType="none"
-                    />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-
+                android:layout_height="wrap_content"
+                android:dropDownWidth="match_parent"
+                android:spinnerMode="dialog" />
 
 
         </LinearLayout>
