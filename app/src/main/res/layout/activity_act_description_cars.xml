@@ -4,11 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-<<<<<<< HEAD
     tools:context=".activities.Act_DescriptionCars">
-=======
-    tools:context=".Act_DescriptionCars">
->>>>>>> f2386c0dd8e34f6ccc6ba8eb05f22afd74164ef5
 
 
 
@@ -94,22 +90,13 @@
                         tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
                     <TextView
-<<<<<<< HEAD
                         android:id="@+id/txt_serviceCarTitle"
                         style="@style/NavTitle"
-=======
-                        android:id="@+id/textView4"
->>>>>>> f2386c0dd8e34f6ccc6ba8eb05f22afd74164ef5
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:fontFamily="sans-serif-condensed"
                         android:gravity="center"
-<<<<<<< HEAD
                         android:text="x"
-=======
-                        style="@style/NavTitle"
-                        android:text="@string/title_activity_auto_parameters_description"
->>>>>>> f2386c0dd8e34f6ccc6ba8eb05f22afd74164ef5
                         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -243,10 +230,7 @@
                     />
             </com.google.android.material.textfield.TextInputLayout>
 
-<<<<<<< HEAD
 
-=======
->>>>>>> f2386c0dd8e34f6ccc6ba8eb05f22afd74164ef5
             <LinearLayout
                 android:id="@+id/linLay_TitulosExtraService"
                 android:layout_width="match_parent"
@@ -265,18 +249,11 @@
 
                     <TextView
                         android:id="@+id/txt_TitulosExtraService"
-<<<<<<< HEAD
                         style="@style/SubTitle"
-=======
->>>>>>> f2386c0dd8e34f6ccc6ba8eb05f22afd74164ef5
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
                         android:fontFamily="sans-serif-black"
                         android:text="Tipo de auto"
-<<<<<<< HEAD
-=======
-                        style="@style/SubTitle"
->>>>>>> f2386c0dd8e34f6ccc6ba8eb05f22afd74164ef5
 
                         android:textAlignment="textStart"
                         android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -287,7 +264,6 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-<<<<<<< HEAD
             </LinearLayout>
 
             <Spinner
@@ -296,49 +272,6 @@
                 android:layout_height="wrap_content"
                 android:dropDownWidth="match_parent"
                 android:spinnerMode="dialog" />
-=======
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/card_serviceCarType"
-                    android:layout_width="0dp"
-                    android:layout_height="150dp"
-                    android:layout_marginTop="16dp"
-                    app:cardBackgroundColor="#FFFFFF"
-                    app:cardCornerRadius="2dp"
-                    app:cardElevation="5dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/linLay_TitulosExtraService">
-
-                </androidx.cardview.widget.CardView>
-
-            </LinearLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                app:boxBackgroundMode="outline"
-                android:layout_height="60dp"
-                android:layout_width="match_parent"
-                android:hint="select"
-                android:layout_margin="16dp"
-
-
-
-
-
-                >
-
-                <AutoCompleteTextView
-                    android:id="@+id/autoComplete_CarType"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:inputType="none"
-                    />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-
->>>>>>> f2386c0dd8e34f6ccc6ba8eb05f22afd74164ef5
 
 
         </LinearLayout>

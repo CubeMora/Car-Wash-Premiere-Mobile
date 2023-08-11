@@ -4,11 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-<<<<<<< HEAD
-    tools:context=".activities.Act_ServicesObjects">
-=======
     tools:context=".Act_ServicesObjects">
->>>>>>> f2386c0dd8e34f6ccc6ba8eb05f22afd74164ef5
 
 
 

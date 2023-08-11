@@ -56,6 +56,7 @@ class Function_AdaptersUtility {
                     "Error al recuperar información: " + t.message,
                     Toast.LENGTH_LONG
                 ).show()
+                Log.e("F", t.toString())
             }
         })
     }

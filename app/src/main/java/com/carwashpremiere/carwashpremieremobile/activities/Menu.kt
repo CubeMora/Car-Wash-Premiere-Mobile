@@ -25,7 +25,6 @@ import com.carwashpremiere.carwashpremieremobile.R
 import com.carwashpremiere.carwashpremieremobile.adapters.Adapter_Category
 import com.carwashpremiere.carwashpremieremobile.adapters.Adapter_Shortcuts
 import com.carwashpremiere.carwashpremieremobile.functions.Function_AdaptersUtility
-import com.carwashpremiere.carwashpremieremobile.whatsapp_test
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class Menu : AppCompatActivity() {
@@ -219,10 +218,6 @@ class Menu : AppCompatActivity() {
 
 
 
-    fun change_Whatsapp(view: View?) {
-        val intent = Intent(this, whatsapp_test::class.java)
-        startActivity(intent)
-    }
 
     fun change_ServicesCars(view: View?) {
         val intent = Intent(this, Act_ServicesCars::class.java)
