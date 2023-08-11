@@ -31,6 +31,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.itextpdf.barcodes.BarcodeQRCode;
+import com.itextpdf.io.font.FontConstants;
 import com.itextpdf.io.image.ImageData;
 import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.io.source.ByteArrayOutputStream;
@@ -40,10 +41,13 @@ import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.kernel.pdf.WriterProperties;
 import com.itextpdf.layout.Document;
+import com.itextpdf.layout.borders.SolidBorder;
 import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.property.TextAlignment;
+import com.itextpdf.layout.property.VerticalAlignment;
 
 import java.io.File;
 import java.io.IOException;
@@ -190,7 +194,7 @@ public class Act_OrderDetail extends AppCompatActivity {
         String filePath = folderPath + File.separator + fileName;
 
         try {
-            // Create a PDF document
+            // Crear un documento PDF
             PdfWriter writer = new PdfWriter(filePath);
             PdfDocument pdfDocument = new PdfDocument(writer);
             Document document = new Document(pdfDocument);
@@ -198,30 +202,58 @@ public class Act_OrderDetail extends AppCompatActivity {
             pdfDocument.setDefaultPageSize(PageSize.A6);
 
             Drawable d = getDrawable(R.drawable.banner);
-            Bitmap bitmap = ((BitmapDrawable)d).getBitmap();
+            Bitmap bitmap = ((BitmapDrawable) d).getBitmap();
 
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
             byte[] bitmapData = stream.toByteArray();
 
             ImageData imageData = ImageDataFactory.create(bitmapData);
-
             Image image = new Image(imageData);
 
-            // Add content to the PDF document
-            Paragraph paragraph = new Paragraph(content);
-            paragraph.setTextAlignment(TextAlignment.LEFT);
+            // Ajustar el tamaño de la imagen para que ocupe todo el ancho y 1/7 del alto de la hoja
+            float pageWidth = PageSize.A6.getWidth();
+            float pageHeight = PageSize.A6.getHeight();
+            float imageWidth = pageWidth;
+            float imageHeight = pageHeight / 7; // 1/7 del alto de la hoja
 
+            image.setWidth(imageWidth);
+            image.setHeight(imageHeight);
 
+            // Centrar la imagen en la página
+            float xPosition = (pageWidth - imageWidth) / 2;
+            float yPosition = pageHeight - imageHeight;
+
+            image.setFixedPosition(xPosition, yPosition);
+
+            // Crear un código QR
+            BarcodeQRCode qrCode = new BarcodeQRCode(content, null);
+            Image qrCodeImage = new Image(qrCode.createFormXObject(ColorConstants.BLACK, pdfDocument));
+            qrCodeImage.setWidth(100);
+            qrCodeImage.setHeight(100);
+
+            // Agregar contenido al documento PDF
             document.add(image);
+
+            // Crear un párrafo con formato para el texto
+            PdfFont font = PdfFontFactory.createFont(FontConstants.COURIER);
+            Paragraph paragraph = new Paragraph(content)
+                    .setFont(font)
+                    .setFontSize(8)
+                    .setTextAlignment(TextAlignment.LEFT)
+                    .setVerticalAlignment(VerticalAlignment.MIDDLE)
+                    .setMarginTop(30)
+                    .setMarginBottom(10)
+                    .setBorder(new SolidBorder(ColorConstants.BLACK, 1)); // Agregar borde
 
             document.add(paragraph);
 
+            document.add(qrCodeImage);
 
-            // Close the document
+            // Cerrar el documento
             document.close();
 
-            Toast.makeText(this, "PDF file created and saved in Downloads folder.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Archivo PDF creado y guardado en la carpeta Descargas.", Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             e.printStackTrace();
             Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();

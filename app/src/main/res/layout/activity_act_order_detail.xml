@@ -237,30 +237,17 @@
 
 
                     <TextView
-                        android:id="@+id/txt_CarParameterDescription"
-                        android:layout_width="134dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="30dp"
-                        android:layout_marginTop="16dp"
-                        android:text=".................................."
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/CardView_ServicesObjects"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_ObjectDetail" />
-
-                    <TextView
                         android:id="@+id/txt_ObjectDetail"
-                        android:layout_width="132dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="30dp"
-                        android:layout_marginTop="80dp"
+                        android:layout_marginStart="170dp"
+                        android:layout_marginEnd="20dp"                        android:layout_marginTop="80dp"
                         android:fontFamily="sans-serif-black"
                         android:gravity="left|center"
                         android:text="TextView"
                         android:textAppearance="@style/CardText"
-                        app:layout_constraintBottom_toTopOf="@+id/txt_CarParameterDescription"
                         app:layout_constraintStart_toEndOf="@+id/CardView_ServicesObjects"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="1.0" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
@@ -346,30 +333,17 @@
 
 
                     <TextView
-                        android:id="@+id/txt_CarEspecificationDescription"
-                        android:layout_width="134dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="30dp"
-                        android:layout_marginTop="16dp"
-                        android:text=".................................."
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/CardView_ServicesEspecifications"
-                        app:layout_constraintTop_toBottomOf="@+id/txt_ObjectSpecifications" />
-
-                    <TextView
                         android:id="@+id/txt_ObjectSpecifications"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="30dp"
-                        android:layout_marginTop="80dp"
+                        android:layout_marginStart="170dp"
+                        android:layout_marginEnd="20dp"
                         android:fontFamily="sans-serif-black"
                         android:gravity="left|center"
                         android:text="TextView"
                         android:textAppearance="@style/CardText"
-                        app:layout_constraintBottom_toTopOf="@+id/txt_CarEspecificationDescription"
                         app:layout_constraintStart_toEndOf="@+id/CardView_ServicesEspecifications"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="1.0" />
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
@@ -545,21 +519,19 @@
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/menuBottomNav"
+        android:id="@+id/bottomAppBar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@android:color/transparent"
-
-
+        android:background="@drawable/shape_bottom_nav_everything"
+        app:itemTextColor="@drawable/menu_bar_select"
+        app:itemIconTint="@drawable/menu_bar_select"
 
         android:layout_alignParentBottom="true" >
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:background="@drawable/shape_bottom_nav_everything"
-            >
+            android:layout_gravity="center">
 
             <!-- Utilizamos un LinearLayout con orientación horizontal como contenedor -->
             <LinearLayout

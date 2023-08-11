@@ -5,7 +5,7 @@
     app:chipBackgroundColor="@color/seed"
     app:closeIconTint="@color/white"
     app:chipCornerRadius="5dp"
-    app:closeIcon="@drawable/baseline_close_24"
+    app:closeIcon="none"
     android:textColor="@color/white"
     android:layout_height="wrap_content"
     android:layout_width="wrap_content"

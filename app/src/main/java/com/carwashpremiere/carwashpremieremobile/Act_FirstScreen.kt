@@ -85,14 +85,17 @@ class Act_FirstScreen : AppCompatActivity() {
                     Toast.makeText(
                         this@Act_FirstScreen,
                         "Authentication succeded: " + accessToken,
+
                         Toast.LENGTH_LONG
                     ).show()
 
-                   /* var intent = Intent(this@Act_FirstScreen, Menu::class.java)
+
+
+                    var intent = Intent(this@Act_FirstScreen, Menu::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
                     intent.putExtra("AccessToken", accessToken)
                     startActivity(intent)
-                    */
+
                 }
             })
     }

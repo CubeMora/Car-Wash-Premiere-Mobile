@@ -66,11 +66,6 @@ public class Act_DescriptionCars extends AppCompatActivity {
                 "tesla"
         };
 
-        ArrayAdapter<String> adapterExample = new ArrayAdapter<>(
-          Act_DescriptionCars.this,
-                androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,
-                types
-        );
 
         Intent intent = getIntent();
         serviceName = intent.getStringExtra("serviceTitle");
