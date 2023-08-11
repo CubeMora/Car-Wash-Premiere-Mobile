@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="15dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="15dp"
+    android:layout_marginBottom="10dp">
+
+
+
+
+    <ImageButton
+        android:id="@+id/btn_Shortcuts"
+        android:layout_width="300dp"
+        android:layout_height="125dp"
+        android:background="@drawable/shape_shorcut"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        />
+
+    <androidx.cardview.widget.CardView
+
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="#00FFFFFF"
+        app:strokeColor="#00FFFFFF"
+        android:outlineSpotShadowColor="#00FFFFFF"
+        android:outlineAmbientShadowColor="#00FFFFFF"
+        android:outlineProvider="none"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_Shortcuts"
+        app:layout_constraintEnd_toEndOf="@+id/btn_Shortcuts"
+        app:layout_constraintTop_toTopOf="@+id/btn_Shortcuts"
+
+    >
+
+        <com.google.android.material.imageview.ShapeableImageView
+
+            android:id="@+id/img_AdapterCategory"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center"
+            android:background="@color/seed"
+            android:layout_margin="0dp"
+            android:layout_marginVertical="10dp"
+            android:paddingVertical="3dp"
+            android:paddingRight="2dp"
+            android:scaleType="centerCrop"
+            app:shapeAppearanceOverlay="@style/CardImageShortcut"
+            app:strokeColor="@android:color/transparent"
+            app:strokeWidth="0dp"
+            tools:layout_editor_absoluteX="223dp"
+
+        />
+
+        <ImageView
+            android:id="@+id/img_ShortcutsIco"
+            android:layout_width="match_parent"
+            android:layout_height="112dp"
+            android:layout_gravity="end"
+            android:layout_margin="10dp"
+
+            app:layout_constraintBottom_toBottomOf="@+id/btn_Shortcuts"
+            app:layout_constraintEnd_toEndOf="@+id/btn_Shortcuts"
+            app:layout_constraintHorizontal_bias="0.882"
+            app:layout_constraintStart_toStartOf="@+id/btn_Shortcuts"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.41"
+            android:padding="20dp"
+            app:srcCompat="@drawable/car_icon" />
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/txt_ShortcutsName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_Shortcuts"
+        app:layout_constraintEnd_toEndOf="@+id/btn_Shortcuts"
+        app:layout_constraintHorizontal_bias="0.066"
+        app:layout_constraintStart_toStartOf="@+id/btn_Shortcuts"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

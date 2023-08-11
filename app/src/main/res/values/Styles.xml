@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="NavTitle">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:textColor">@color/black</item>
+        <!-- Agrega aquí otros atributos personalizados para los TextViews -->
+    </style>
+
+    <style name="TextAreaInput">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/md_theme_light_primary</item>
+        <!-- Agrega aquí otros atributos personalizados para los TextViews -->
+    </style>
+
+    <style name="NavSubTitle">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/black</item>
+        <!-- Agrega aquí otros atributos personalizados para los TextViews -->
+    </style>
+
+    <style name="CheckBoxText">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/seed</item>
+        <!-- Agrega aquí otros atributos personalizados para los TextViews -->
+    </style>
+
+
+    <style name="BottomNavButton">
+        <item name="android:textStyle">bold</item>
+
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/white</item>
+        <!-- Agrega aquí otros atributos personalizados para los TextViews -->
+    </style>
+
+    <style name="BottomNavText">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/purple_700</item>
+        <!-- Agrega aquí otros atributos personalizados para los TextViews -->
+    </style>
+
+    <style name="SubTitle">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:textColor">@color/black</item>
+        <!-- Agrega aquí otros atributos personalizados para los TextViews -->
+    </style>
+
+    <style name="CardText">
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/black</item>
+        <!-- Agrega aquí otros atributos personalizados para los TextViews -->
+    </style>
+
+    <style name="CardImageMenu">
+        <item name="cornerSizeBottomRight">28dp</item>
+        <item name="cornerSizeTopRight">28dp</item>
+
+        <item name="cornerSizeBottomLeft">100%</item>
+        <item name="cornerFamilyBottomLeft">cut</item>
+
+        <item name="cornerSize">0dp</item>
+
+        <!-- Agrega aquí otros atributos personalizados para los TextViews -->
+    </style>
+
+    <style name="CardImageShortcut">
+        <item name="cornerSizeBottomRight">28dp</item>
+        <item name="cornerSizeTopRight">28dp</item>
+        <item name="cornerSizeTopLeft">28dp</item>
+        <item name="cornerSizeBottomLeft">28dp</item>
+
+    </style>
+
+
+    <style name="CardOrderDetail">
+        <item name="cornerSizeBottomRight">15dp</item>
+        <item name="cornerSizeTopRight">15dp</item>
+        <item name="cornerSizeTopLeft">15dp</item>
+        <item name="cornerSizeBottomLeft">15dp</item>
+
+    </style>
+
+
+
+
+
+</resources>
