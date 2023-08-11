@@ -8,43 +8,44 @@
     android:layout_marginTop="10dp"
     android:layout_marginEnd="15dp"
     android:layout_marginBottom="10dp"
-    android:background="@drawable/shape_categorybtn">
+    android:backgroundTint="@color/white"
+    android:elevation="5dp"
+    android:background="@drawable/shape_background_check_detail">
 
     <TextView
         android:id="@+id/txt_AdapterObjectDetail"
+        style="@style/CheckBoxText"
         android:layout_width="232dp"
         android:layout_height="58dp"
-        android:layout_marginStart="8dp"
         android:fontFamily="sans-serif-medium"
         android:gravity="center_vertical"
         android:text="TextView"
 
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/txt_ExtraServiceObjectPrice"
+        app:layout_constraintStart_toEndOf="@+id/chBox_AdapterObjectDetail"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txt_ExtraServiceObjectPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="15dp"
         android:text="TextView"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/seed"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/chBox_AdapterObjectDetail"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <CheckBox
         android:id="@+id/chBox_AdapterObjectDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:buttonTint="@color/purple_700"
+        android:buttonTint="@color/seed"
         android:checked="false"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

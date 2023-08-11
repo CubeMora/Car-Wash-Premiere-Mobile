@@ -178,9 +178,3 @@ The role that was assigned to me to work on throughout this process was Frontend
 
 Closing the current topic is important to say, maintenance is not only adding or removing random stuff just to pretend we are working but actually preventing, updating and re-shaping the whole software even.
 Using GitHub we can have better control over who did what and all versions of a project in one place for all, and finally using a dashboard will allow us to organize times and schedule tasks in order to progress, and also the person who's going to be in charge of determined tasks or piece.
-
-### Bibliography
-
-Cool, N. M. (2023, April 13). *What Is GitHub? - Code Institute IE*. Code Institute IE. https://codeinstitute.net/global/blog/github-might-benefit-using/#:~:text=GitHub%20allows%20people%20to%20store,and%20of%20course%2C%20potential%20solutions.
-
-*Asana project management software: features, uses, and teamwork*. (n.d.). https://www.fingerprintforsuccess.com/blog/asana-software
