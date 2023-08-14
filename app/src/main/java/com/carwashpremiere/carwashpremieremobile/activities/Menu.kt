@@ -1,5 +1,6 @@
 package com.carwashpremiere.carwashpremieremobile.activities
 
+import android.annotation.SuppressLint
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.Main
 import android.app.Dialog
@@ -42,6 +43,7 @@ class Menu : AppCompatActivity() {
 
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -52,6 +54,19 @@ class Menu : AppCompatActivity() {
 
         initUI()
         asyncAdapter()
+
+        if(!sharedPreferences!!.contains("access_token")){
+            val dialogFirstLogin = Dialog(this)
+            val view = LayoutInflater.from(this).inflate(R.layout.modal_loginforce, null)
+            dialogFirstLogin.setContentView(view)
+            dialogFirstLogin.setCancelable(false)
+
+            val btn_forcelogin = view.findViewById<Button>(R.id.btn_iniciarSesion)
+            btn_forcelogin.setOnClickListener {
+                auth0utility!!.loginWithBrowser()
+            }
+            dialogFirstLogin.show()
+        }
 
 
 

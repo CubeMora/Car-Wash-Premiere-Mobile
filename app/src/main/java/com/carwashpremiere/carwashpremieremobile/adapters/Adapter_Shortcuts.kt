@@ -34,16 +34,17 @@ class Adapter_Shortcuts(
         Picasso.get().load(mShortcutsList[position].imgUrl).into(holder.img_Shortcut)
         holder.itemView.tag = mShortcutsList[position].id
         holder.btn_Shortcut.setOnClickListener { //
-            //Toast.makeText(mContext, "Ekish", Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, mShortcutsList.toString(), Toast.LENGTH_SHORT).show();
             //Show a toast with the id of the clicked item
             //Toast.makeText(mContext,  "mCategoryList.get(id)" + v.getTag(), Toast.LENGTH_SHORT).show();
             val categoryId = mShortcutsList[position].id
-            Toast.makeText(mContext, "Category ID: $categoryId", Toast.LENGTH_SHORT).show()
+
             val activityId = mShortcutsList[position].screen_name
             val serviceName = mShortcutsList[position].title
-            var intent: Intent? = null
+
             val activityClass: Class<*> = Function_ActivityMap.getActivityClass(activityId)
-            intent = Intent(mContext, activityClass)
+
+            var intent = Intent(mContext, activityClass)
             intent.putExtra("serviceTitle", serviceName)
             mContext.startActivity(intent)
         }

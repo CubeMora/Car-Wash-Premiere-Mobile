@@ -176,10 +176,10 @@ class Act_OrderDetail : AppCompatActivity() {
             ) {
 
                 coroutineScope.launch {
-                    showLoadingDialog()
+
                     // Llama a structureAdapters() en el contexto principal
                     withContext(Dispatchers.Main) {
-
+                        showLoadingDialog()
                         generatePdfFile(messageContent)
                     }
 
@@ -294,18 +294,20 @@ class Act_OrderDetail : AppCompatActivity() {
                 .setBorder(SolidBorder(ColorConstants.BLACK, 1f)) // Agregar borde
             document.add(paragraph)
             document.add(qrCodeImage)
-            dialogLoading!!.dismiss()
 
 
-            showConfirmDialog()
+
+
             // Cerrar el documento
             document.close()
-            val pdfFile = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "cotizacion.pdf")
+            dialogLoading!!.dismiss()
+            showConfirmDialog()
+
 
 
             Toast.makeText(
                 this,
-                "Archivo PDF creado y guardado en la carpeta Descargas. ${pdfFile}",
+                "Archivo PDF creado y guardado en la carpeta Descargas.",
                 Toast.LENGTH_SHORT
             ).show()
 
@@ -317,6 +319,7 @@ class Act_OrderDetail : AppCompatActivity() {
         }
 
     fun sendPdf(){
+
         val pdfFile = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "cotizacion.pdf")
 
         if (pdfFile.exists()) {
@@ -373,6 +376,7 @@ class Act_OrderDetail : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         if (hasClickedWA) {
+            dialogConfirm!!.dismiss()
             btn_Next!!.visibility = View.VISIBLE
         } else {
             btn_WA!!.visibility = View.VISIBLE
