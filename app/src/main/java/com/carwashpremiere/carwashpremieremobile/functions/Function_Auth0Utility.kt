@@ -6,10 +6,12 @@ import android.content.SharedPreferences
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.auth0.android.Auth0
+import com.auth0.android.authentication.AuthenticationAPIClient
 import com.auth0.android.authentication.AuthenticationException
 import com.auth0.android.callback.Callback
 import com.auth0.android.provider.WebAuthProvider
 import com.auth0.android.result.Credentials
+import com.auth0.android.result.UserProfile
 import com.carwashpremiere.carwashpremieremobile.R
 import com.carwashpremiere.carwashpremieremobile.activities.Menu
 
@@ -78,6 +80,8 @@ class Function_Auth0Utility(val context: Context) {
 
         val editor = sharedPreferences!!.edit()
         editor.remove("access_token")
+        editor.remove("email")
+        editor.remove("name")
         editor.apply()
         WebAuthProvider.logout(account)
             .withScheme("demo")
@@ -94,6 +98,32 @@ class Function_Auth0Utility(val context: Context) {
                     // Something went wrong!
                 }
             })
+    }
+    fun showUserProfile(accessToken: String) {
+        var client = AuthenticationAPIClient(account)
+
+        // With the access token, call `userInfo` and get the profile from Auth0.
+        client.userInfo(accessToken)
+            .start(object : Callback<UserProfile, AuthenticationException> {
+                override fun onFailure(exception: AuthenticationException) {
+                    // Something went wrong!
+                }
+
+                override fun onSuccess(profile: UserProfile) {
+                    // We have the user's profile!
+                    val email = profile.email
+                    val name = profile.name
+
+                    sharedPreferences = context.getSharedPreferences("auth_prefs", Context.MODE_PRIVATE)
+                    val editor = sharedPreferences!!.edit()
+                    editor.putString("email", email)
+                    editor.putString("name", name)
+                    editor.apply()
+
+                }
+            })
+
+
     }
 
 

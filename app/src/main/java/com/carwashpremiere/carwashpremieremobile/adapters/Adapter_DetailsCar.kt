@@ -11,10 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.carwashpremiere.carwashpremieremobile.R
 import com.carwashpremiere.carwashpremieremobile.adapters.Adapter_DetailsCar.DetailsCarViewHolder
 import com.carwashpremiere.carwashpremieremobile.model.Model_DetailsGeneral
+import com.carwashpremiere.carwashpremieremobile.model.Model_ExtraServicesGeneral
 
 class Adapter_DetailsCar(
     private val mContext: Context,
-    private val mDetailsCarList: List<Model_DetailsGeneral>
+    private var mDetailsCarList: List<Model_DetailsGeneral>
 ) : RecyclerView.Adapter<DetailsCarViewHolder>() {
     private val selectedAdaptersList: MutableList<String> = ArrayList()
     private val selectedDetails: MutableList<String> = ArrayList()
@@ -50,6 +51,10 @@ class Adapter_DetailsCar(
 
     fun getSelectedAdaptersList(): List<String> {
         return selectedAdaptersList
+    }
+
+    fun setData(dataList: List<Model_DetailsGeneral>) {
+        mDetailsCarList = dataList
     }
 
     inner class DetailsCarViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

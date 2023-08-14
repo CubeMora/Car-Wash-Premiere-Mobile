@@ -229,7 +229,7 @@ var flag: Boolean = false
         })
     }
 
-    fun createAdapterDetailsCar(context: Context, rView: RecyclerView) {
+    fun createAdapterDetailsCar(context: Context,rView: RecyclerView, adapterDetailsCar: Adapter_DetailsCar) {
         val apiInterface = RetrofitClient.instance?.create(Interface_RetrofitMethods::class.java)
         val call = apiInterface?.getCarDetails()
 
@@ -239,8 +239,8 @@ var flag: Boolean = false
                     val dataList = response.body()
                     if (dataList != null) {
                         // Crear un nuevo adaptador con los datos recibidos y establecerlo en el RecyclerView
-                        val adapter = Adapter_DetailsCar(context, dataList)
-                        rView.adapter = adapter
+                        adapterDetailsCar.setData(dataList)
+                        adapterDetailsCar.notifyDataSetChanged()
 
 
                     }
@@ -298,7 +298,7 @@ var flag: Boolean = false
         })
     }
 
-    fun createAdapterExtraServicesCar(context: Context, rView: RecyclerView) {
+    fun createAdapterExtraServicesCar(context: Context, rView: RecyclerView, adapter: Adapter_ExtraServicesCar) {
         val apiInterface = RetrofitClient.instance?.create(Interface_RetrofitMethods::class.java)
         val call = apiInterface?.getExtraServicesCars()
 
@@ -308,8 +308,8 @@ var flag: Boolean = false
                     val dataList = response.body()
                     if (dataList != null) {
                         // Crear un nuevo adaptador con los datos recibidos y establecerlo en el RecyclerView
-                        val adapter = Adapter_ExtraServicesCar(context, dataList)
-                        rView.adapter = adapter
+                        adapter?.setData(dataList)
+                        adapter?.notifyDataSetChanged()
                     }
                 } else {
                     // Manejar el error de la respuesta

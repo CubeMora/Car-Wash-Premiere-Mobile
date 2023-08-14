@@ -15,6 +15,7 @@ import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.Field
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 
 /*
@@ -36,7 +37,12 @@ TODO 12: Misc
 
 interface Interface_RetrofitMethods {
 
-    @GET("allgets.pho?opt=11")
+    @GET("allgets.php?opt=11")
+    fun getCarDescription_Name(
+        @Query ("opt") opt: String,
+        @Query ("service_name") service_name: String,
+
+    ): Call<Model_ServicesCars>
 
     //CarType
         //-- CREATE --

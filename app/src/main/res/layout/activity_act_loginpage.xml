@@ -7,7 +7,7 @@
     android:background="@color/orange"
     android:orientation="vertical"
 
-    tools:context=".Act_OrderDetail">
+    tools:context=".activities.Act_OrderDetail">
 
 
 

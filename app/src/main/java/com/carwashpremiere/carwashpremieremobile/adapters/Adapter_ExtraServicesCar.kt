@@ -14,7 +14,7 @@ import com.carwashpremiere.carwashpremieremobile.model.Model_ExtraServicesGenera
 
 class Adapter_ExtraServicesCar(
     private val mContext: Context,
-    private val mExtraServicesCarsList: List<Model_ExtraServicesGeneral>
+    private var mExtraServicesCarsList: List<Model_ExtraServicesGeneral>
 ) : RecyclerView.Adapter<ExtraServicesCarViewHolder>() {
     private var totalPrice = 0.0
     private val selectedServices: MutableList<String> = ArrayList()
@@ -50,6 +50,9 @@ class Adapter_ExtraServicesCar(
 
     fun getSelectedServices(): List<String> {
         return selectedServices
+    }
+    fun setData(dataList: List<Model_ExtraServicesGeneral>) {
+        mExtraServicesCarsList = dataList
     }
 
     override fun getItemCount(): Int {
