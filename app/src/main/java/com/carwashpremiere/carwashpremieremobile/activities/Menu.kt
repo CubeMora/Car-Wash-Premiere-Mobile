@@ -14,7 +14,9 @@ import android.view.View
 import android.view.Window
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.ProgressBar
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -24,12 +26,14 @@ import com.carwashpremiere.carwashpremieremobile.adapters.Adapter_Shortcuts
 import com.carwashpremiere.carwashpremieremobile.functions.Function_AdaptersUtility
 import com.carwashpremiere.carwashpremieremobile.functions.Function_Auth0Utility
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 
 class Menu : AppCompatActivity() {
 
     var imgBtn_Atajo1: ImageButton? = null
+
 
     var menuBottomNav: BottomNavigationView? = null
     private var rView_Categories: RecyclerView? = null
@@ -44,6 +48,7 @@ class Menu : AppCompatActivity() {
 
 
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -82,12 +87,22 @@ class Menu : AppCompatActivity() {
                 val btn_login = view.findViewById<Button>(R.id.btn_Login)
                 val btn_admin = view.findViewById<Button>(R.id.btn_Admin)
                 val btn_logout = view.findViewById<Button>(R.id.btn_Logout)
+                val txt_username = view.findViewById<TextView>(R.id.txt_usernameModal)
+                val img_userPicture = view.findViewById<ImageView>(R.id.img_userPicture)
+
+                val sharedPreferences: SharedPreferences = getSharedPreferences("auth_prefs", MODE_PRIVATE)
+                val username = sharedPreferences.getString("name", null)
+                val img = sharedPreferences.getString("picture", null)
+
+                txt_username.text = username
+                Picasso.get().load(img).into(img_userPicture)
 
                 btn_login.visibility = View.GONE
 
                 if(!sharedPreferences!!.contains("access_token")){
                     btn_admin.visibility = View.GONE
                     btn_logout.visibility = View.GONE
+                    txt_username.visibility = View.GONE
                     btn_login.visibility = View.VISIBLE
                 }
 

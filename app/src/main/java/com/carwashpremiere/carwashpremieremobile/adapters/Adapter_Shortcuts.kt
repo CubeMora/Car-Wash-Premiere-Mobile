@@ -34,7 +34,7 @@ class Adapter_Shortcuts(
         Picasso.get().load(mShortcutsList[position].imgUrl).into(holder.img_Shortcut)
         holder.itemView.tag = mShortcutsList[position].id
         holder.btn_Shortcut.setOnClickListener { //
-            Toast.makeText(mContext, mShortcutsList.toString(), Toast.LENGTH_SHORT).show();
+
             //Show a toast with the id of the clicked item
             //Toast.makeText(mContext,  "mCategoryList.get(id)" + v.getTag(), Toast.LENGTH_SHORT).show();
             val categoryId = mShortcutsList[position].id

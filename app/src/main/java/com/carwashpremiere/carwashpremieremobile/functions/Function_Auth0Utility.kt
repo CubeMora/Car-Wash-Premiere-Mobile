@@ -59,7 +59,9 @@ class Function_Auth0Utility(val context: Context) {
                     sharedPreferences = context.getSharedPreferences("auth_prefs", Context.MODE_PRIVATE)
                     val editor = sharedPreferences!!.edit()
                     editor.putString("access_token", accessToken)
+
                     editor.apply()
+                    showUserProfile(accessToken!!)
 
 
                     Toast.makeText(
@@ -82,6 +84,7 @@ class Function_Auth0Utility(val context: Context) {
         editor.remove("access_token")
         editor.remove("email")
         editor.remove("name")
+        editor.remove("picture")
         editor.apply()
         WebAuthProvider.logout(account)
             .withScheme("demo")
@@ -113,11 +116,13 @@ class Function_Auth0Utility(val context: Context) {
                     // We have the user's profile!
                     val email = profile.email
                     val name = profile.name
+                    val image = profile.pictureURL
 
                     sharedPreferences = context.getSharedPreferences("auth_prefs", Context.MODE_PRIVATE)
                     val editor = sharedPreferences!!.edit()
                     editor.putString("email", email)
                     editor.putString("name", name)
+                    editor.putString("picture", image)
                     editor.apply()
 
                 }
