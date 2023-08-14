@@ -42,12 +42,13 @@ class Act_ObjectParameters : AppCompatActivity() {
     var adapterExtraServiceObject: Adapter_ExtraServicesObject? = null
     var mDetailsObjectsList: List<Model_DetailsGeneral> = ArrayList()
     var mExtraServicesObjectsList: List<Model_ExtraServicesGeneral> = ArrayList()
-    val adaptersUtility = Function_AdaptersUtility()
+    var adaptersUtility: Function_AdaptersUtility? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         supportActionBar!!.hide()
         setContentView(R.layout.activity_act_object_parameters)
+        adaptersUtility = Function_AdaptersUtility(this)
         initUI()
 
         structureAdapters()
@@ -156,8 +157,8 @@ class Act_ObjectParameters : AppCompatActivity() {
         adapterDetailsObject = Adapter_DetailsObject(this, mDetailsObjectsList)
         rList_DetailsObject!!.adapter = adapterDetailsObject
 
-        adaptersUtility.createAdapterExtraServicesObject(this, rList_ExtraServicesObject!!, adapterExtraServiceObject!!)
-        adaptersUtility.createAdapterDetailsObject(this, rList_DetailsObject!!, adapterDetailsObject!!)
+        adaptersUtility!!.createAdapterExtraServicesObject(this, rList_ExtraServicesObject!!, adapterExtraServiceObject!!)
+        adaptersUtility!!.createAdapterDetailsObject(this, rList_DetailsObject!!, adapterDetailsObject!!)
     }
 
     fun initUI() {

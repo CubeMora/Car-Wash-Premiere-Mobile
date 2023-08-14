@@ -42,7 +42,7 @@ class Act_ServicesCars : AppCompatActivity() {
     }
 
     private fun structureAdapters() {
-        val adaptersUtility = Function_AdaptersUtility()
+        val adaptersUtility = Function_AdaptersUtility(this)
         rList_ServicesCars = findViewById(R.id.rList_ServicesCars)
 
 

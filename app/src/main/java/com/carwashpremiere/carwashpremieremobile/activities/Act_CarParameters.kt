@@ -91,7 +91,7 @@ class Act_CarParameters : AppCompatActivity() {
     }
 
     private fun structureAdapters() {
-        val adaptersUtility = Function_AdaptersUtility()
+        val adaptersUtility = Function_AdaptersUtility(this)
 
         val linearLayoutManagerExtra = LinearLayoutManager(this)
         linearLayoutManagerExtra.orientation = LinearLayoutManager.VERTICAL
