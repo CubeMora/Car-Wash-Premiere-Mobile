@@ -39,7 +39,7 @@ class Act_ServicesObjects : AppCompatActivity() {
     }
 
     private fun structureAdapters() {
-        val adaptersUtility = Function_AdaptersUtility()
+        val adaptersUtility = Function_AdaptersUtility(this)
 
 
         val layoutManager = LinearLayoutManager(this)

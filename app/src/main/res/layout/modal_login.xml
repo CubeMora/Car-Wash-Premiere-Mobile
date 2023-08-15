@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linLayout_Login"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txt_titleLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="50dp"
+            android:fontFamily="@font/spartan_bold"
+            android:text="USUARIO"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/img_userPicture"
+            android:layout_width="250dp"
+            android:layout_height="200dp"
+            android:src="@drawable/vector_user"
+            app:srcCompat="@drawable/vector_user"
+            tools:srcCompat="@drawable/vector_user" />
+
+        <TextView
+            android:id="@+id/txt_usernameModal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="TextView"
+            android:textAlignment="center"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:id="@+id/linLayout_BtnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_Login"
+                style="@style/BottomNavButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="INICIAR SESIÓN" />
+
+            <Button
+                android:id="@+id/btn_Admin"
+                style="@style/BottomNavButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="PANEL ADMINISTRADOR" />
+
+            <Button
+                android:id="@+id/btn_Logout"
+                style="@style/BottomNavButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/teal_200"
+                android:text="CERRAR SESIÓN" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

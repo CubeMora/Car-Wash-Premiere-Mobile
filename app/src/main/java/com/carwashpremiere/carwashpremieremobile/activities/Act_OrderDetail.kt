@@ -1,13 +1,20 @@
 package com.carwashpremiere.carwashpremieremobile.activities
 
 import android.Manifest
+import android.annotation.SuppressLint
+import android.app.Dialog
+import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.view.Window
 import android.widget.Button
@@ -17,20 +24,31 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.carwashpremiere.carwashpremieremobile.functions.Function_NetworkRequests
+import androidx.core.content.FileProvider
 import com.carwashpremiere.carwashpremieremobile.R
+import com.carwashpremiere.carwashpremieremobile.functions.Function_Auth0Utility
+import com.carwashpremiere.carwashpremieremobile.functions.Function_NetworkRequests
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.itextpdf.barcodes.BarcodeQRCode
+import com.itextpdf.io.font.FontConstants
 import com.itextpdf.io.image.ImageDataFactory
 import com.itextpdf.io.source.ByteArrayOutputStream
+import com.itextpdf.kernel.colors.ColorConstants
+import com.itextpdf.kernel.font.PdfFontFactory
 import com.itextpdf.kernel.geom.PageSize
 import com.itextpdf.kernel.pdf.PdfDocument
 import com.itextpdf.kernel.pdf.PdfWriter
 import com.itextpdf.layout.Document
+import com.itextpdf.layout.borders.SolidBorder
 import com.itextpdf.layout.element.Image
 import com.itextpdf.layout.element.Paragraph
 import com.itextpdf.layout.property.TextAlignment
+import com.itextpdf.layout.property.VerticalAlignment
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.File
@@ -61,6 +79,11 @@ class Act_OrderDetail : AppCompatActivity() {
     var txt_Details: TextView? = null
     var txt_Specifications: TextView? = null
     private var messageContent: String? = null
+    var sharedPreferences: SharedPreferences? = null
+    var accessToken: String? = null
+    private val coroutineScope = CoroutineScope(Dispatchers.Main)
+    var dialogLoading: Dialog? = null
+    var dialogConfirm: Dialog? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -68,6 +91,16 @@ class Act_OrderDetail : AppCompatActivity() {
         setContentView(R.layout.activity_act_order_detail)
         initUI()
         networkRequests = Function_NetworkRequests(this)
+        Log.e("Create", "No")
+        sharedPreferences = getSharedPreferences("auth_prefs", Context.MODE_PRIVATE)
+
+        accessToken = sharedPreferences!!.getString("access_token", null)
+        Function_Auth0Utility(this).showUserProfile(accessToken!!)
+
+        var username: String? = sharedPreferences!!.getString("name", null)
+        var email = sharedPreferences!!.getString("email", null)
+
+
         getPhoneNumberFromServer(networkRequests!!)
         btn_WA!!.setOnClickListener {
             hasClickedWA = true
@@ -91,13 +124,14 @@ class Act_OrderDetail : AppCompatActivity() {
                     allChipDetailsTexts.append(chipText).append("\n")
                 }
             }
+
             val allChipTextsServiceString = allChipServicesTexts.toString()
             val allChipTextsDetailsString = allChipDetailsTexts.toString()
             var message = ""
             if (bundleType == "car") {
                 val service_title = txt_ServiceTitle!!.text.toString()
                 val car_type = txt_objectDetail!!.text.toString()
-                message = ("Cotización para el servicio de " + service_title
+                message = ("Usuario: " + username + " Email: " + email + "\n" + "Cotización para el servicio de " + service_title
                         + " con el siguiente detalle: \n\n"
                         + "Tipo de vehículo: " + car_type + "\n"
                         + "Servicios extra: " + allChipTextsServiceString + "\n"
@@ -110,7 +144,11 @@ class Act_OrderDetail : AppCompatActivity() {
             } else if (bundleType == "object") {
                 val object_title = bundle!!.getString("objectTitle")
                 val object_specifications = txt_Specifications!!.text.toString()
+
                 message = """
+                    
+                    Usuario: $username.
+                    Email: $email.
                     Cotización para el objeto:  $object_title.
                     
                     Con las siguientes especificaciones: $object_specifications
@@ -128,14 +166,26 @@ class Act_OrderDetail : AppCompatActivity() {
             // Store the message content to use later in onRequestPermissionsResult
             messageContent = message
 
+
+
             // Check if the storage write permission is granted
             if (ContextCompat.checkSelfPermission(
                     this@Act_OrderDetail,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE
                 ) == PackageManager.PERMISSION_GRANTED
             ) {
+
+                coroutineScope.launch {
+
+                    // Llama a structureAdapters() en el contexto principal
+                    withContext(Dispatchers.Main) {
+                        showLoadingDialog()
+                        generatePdfFile(messageContent)
+                    }
+
+                }
                 // Permission granted, generate the PDF file
-                generatePdfFile(messageContent)
+
             } else {
                 // Request the storage write permission
                 ActivityCompat.requestPermissions(
@@ -169,13 +219,36 @@ class Act_OrderDetail : AppCompatActivity() {
         })
     }
 
-    private fun generatePdfFile(content: String?) {
+    fun showLoadingDialog() {
+        dialogLoading = Dialog(this) // Inicializar el dialogLoading
+        val view = LayoutInflater.from(this).inflate(R.layout.modal_loading, null)
+        dialogLoading!!.setContentView(view)
+        dialogLoading!!.setCancelable(false)
+        dialogLoading!!.show()
+    }
+
+    @SuppressLint("MissingInflatedId")
+    fun showConfirmDialog(){
+        dialogConfirm = Dialog(this) // Inicializar el dialogLoading
+        val view = LayoutInflater.from(this).inflate(R.layout.modal_confirmpdf, null)
+        dialogConfirm!!.setContentView(view)
+        dialogConfirm!!.setCancelable(false)
+
+        var btn_sendMessage = view.findViewById<Button>(R.id.btn_sendPdf)
+        btn_sendMessage.setOnClickListener{
+            sendPdf()
+        }
+
+        dialogConfirm!!.show()
+    }
+
+    fun generatePdfFile(content: String?) {
         val fileName = "cotizacion.pdf"
         val folderPath =
             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).absolutePath
         val filePath = folderPath + File.separator + fileName
         try {
-            // Create a PDF document
+            // Crear un documento PDF
             val writer = PdfWriter(filePath)
             val pdfDocument = PdfDocument(writer)
             val document = Document(pdfDocument)
@@ -188,43 +261,98 @@ class Act_OrderDetail : AppCompatActivity() {
             val imageData = ImageDataFactory.create(bitmapData)
             val image = Image(imageData)
 
-            // Add content to the PDF document
-            val paragraph = Paragraph(content)
-            paragraph.setTextAlignment(TextAlignment.LEFT)
+            // Ajustar el tamaño de la imagen para que ocupe todo el ancho y 1/7 del alto de la hoja
+            val pageWidth = PageSize.A6.width
+            val pageHeight = PageSize.A6.height
+            val imageHeight = pageHeight / 7 // 1/7 del alto de la hoja
+            image.setWidth(pageWidth)
+            image.setHeight(imageHeight)
+
+            // Centrar la imagen en la página
+            val xPosition = (pageWidth - pageWidth) / 2
+            val yPosition = pageHeight - imageHeight
+            image.setFixedPosition(xPosition, yPosition)
+
+            // Crear un código QR
+            val qrCode = BarcodeQRCode(content, null)
+            val qrCodeImage = Image(qrCode.createFormXObject(ColorConstants.BLACK, pdfDocument))
+            qrCodeImage.setWidth(100f)
+            qrCodeImage.setHeight(100f)
+
+            // Agregar contenido al documento PDF
             document.add(image)
+
+            // Crear un párrafo con formato para el texto
+            val font = PdfFontFactory.createFont(FontConstants.COURIER)
+            val paragraph = Paragraph(content)
+                .setFont(font)
+                .setFontSize(8f)
+                .setTextAlignment(TextAlignment.LEFT)
+                .setVerticalAlignment(VerticalAlignment.MIDDLE)
+                .setMarginTop(30f)
+                .setMarginBottom(10f)
+                .setBorder(SolidBorder(ColorConstants.BLACK, 1f)) // Agregar borde
             document.add(paragraph)
+            document.add(qrCodeImage)
 
 
-            // Close the document
+
+
+            // Cerrar el documento
             document.close()
+            dialogLoading!!.dismiss()
+            showConfirmDialog()
+
+
+
             Toast.makeText(
                 this,
-                "PDF file created and saved in Downloads folder.",
+                "Archivo PDF creado y guardado en la carpeta Descargas.",
                 Toast.LENGTH_SHORT
             ).show()
-        } catch (e: IOException) {
-            e.printStackTrace()
+
+
+    } catch (e: IOException) {
+        e.printStackTrace()
             Toast.makeText(this, "Error: " + e.message, Toast.LENGTH_SHORT).show()
+    }
         }
+
+    fun sendPdf(){
+
+        val pdfFile = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "cotizacion.pdf")
+
+        if (pdfFile.exists()) {
+            val contentUri = FileProvider.getUriForFile(this, "$packageName.fileprovider", pdfFile)
+            val intent = Intent(Intent.ACTION_SEND)
+            intent.type = "application/pdf"
+            intent.putExtra(Intent.EXTRA_STREAM, contentUri)
+            intent.putExtra(Intent.EXTRA_TEXT, "¡Hola que tal! Quisiera pedir informes sobre el siguiente servicio: ")
+            intent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+
+            // Forma el enlace de WhatsApp con el número de teléfono
+            val whatsappUrl = "https://wa.me/$phoneNumber"
+
+            Log.e("WHATSAPP URL", whatsappUrl + pdfFile)
+
+           // intent.putExtra(Intent.EXTRA_TEXT, "¡Aquí tienes el archivo PDF! $whatsappUrl")
+
+            try {
+                startActivity(intent)
+            } catch (e: ActivityNotFoundException) {
+                // WhatsApp no está instalado en el dispositivo
+                Toast.makeText(this, "WhatsApp no está instalado", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            Toast.makeText(this, "El archivo PDF no existe", Toast.LENGTH_SHORT).show()
+        }
+
+
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == 1) {
-            // Check if the permission is granted
-            if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Permission granted, generate the PDF file
-                generatePdfFile(messageContent)
-            } else {
-                // Permission denied, show a toast or handle accordingly
-                Toast.makeText(this, "Storage write permission denied.", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
+
+
+
 
     fun getPhoneNumberFromServer(networkRequests: Function_NetworkRequests) {
         phoneNumber = ""
@@ -248,6 +376,7 @@ class Act_OrderDetail : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         if (hasClickedWA) {
+            dialogConfirm!!.dismiss()
             btn_Next!!.visibility = View.VISIBLE
         } else {
             btn_WA!!.visibility = View.VISIBLE
@@ -271,6 +400,7 @@ class Act_OrderDetail : AppCompatActivity() {
         cardView_ExtraServicesSpecifications = findViewById(R.id.card_ExtraServicesSpecifications)
         cardView_DetailsSpecifications = findViewById(R.id.card_DetailsSpecifications)
         bundle = intent.extras
+
         if (bundle != null) {
             bundleType = bundle!!.getString("bundleType")
             val totalPrice = bundle!!.getDouble("totalPrice")

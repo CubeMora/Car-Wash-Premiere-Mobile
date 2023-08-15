@@ -17,6 +17,17 @@
         android:theme="@style/Theme.CarWashPremiereMobile"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
         <activity
             android:name=".activities.Act_testCRUD"
             android:exported="false" />
@@ -25,9 +36,7 @@
             android:exported="false">
 
         </activity>
-        <activity
-            android:name=".Test"
-            android:exported="false" />
+
         <activity
             android:name=".activities.Act_ObjectParameters"
             android:exported="false" />
@@ -54,17 +63,16 @@
             android:exported="false" />
         <activity
             android:name=".activities.Act_AdminCrud"
-            android:exported="false" />
-        <activity
-            android:name=".whatsapp_test"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:exported="true">
+
+        </activity>
+
+
         <activity
             android:name=".activities.Menu"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

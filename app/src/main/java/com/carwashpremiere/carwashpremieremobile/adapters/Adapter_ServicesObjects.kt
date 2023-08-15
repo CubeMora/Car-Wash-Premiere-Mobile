@@ -59,7 +59,7 @@ class Adapter_ServicesObjects(
 
         init {
             txt_name = itemView.findViewById(R.id.txt_ServicesObjectsTitle)
-            txt_description = itemView.findViewById(R.id.txt_ServicesObjectsDescription)
+            txt_description = itemView.findViewById(R.id.txt_ServicesCarsDescription)
             img_service = itemView.findViewById(R.id.img_ServicesObjects)
             btn_serviceObject = itemView.findViewById(R.id.btn_ServicesObjects)
         }

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
 import android.view.Window
 import android.widget.AdapterView
@@ -59,11 +60,10 @@ class Act_DescriptionCars : AppCompatActivity() {
 
         val intent = intent
         serviceName = intent.getStringExtra("serviceTitle")
-        getCarTypes()
+        Log.e("Intent", serviceName.toString())
+        getCarTypesSpinner()
+        getService()
 
-        //autoCompleteTextView!!.setAdapter(adapter)
-
-       // getServicesCarsFromServer(networkRequests!!)
 
 
         btn_Back!!.setOnClickListener(View.OnClickListener { // Terminar la actividad y regresar al menú principal
@@ -72,6 +72,7 @@ class Act_DescriptionCars : AppCompatActivity() {
             startActivity(intent)
             finish()
         })
+
         btn_Next!!.setOnClickListener(View.OnClickListener {
             if (selectedAuto != null) {
                 val intent = Intent(this@Act_DescriptionCars, Act_CarParameters::class.java)
@@ -91,6 +92,7 @@ class Act_DescriptionCars : AppCompatActivity() {
     fun InitUI(){
         txt_ServiceDescription = findViewById(R.id.txt_ServiceDescription)
         sp_CarType = findViewById(R.id.sp_CarType);
+        txt_title = findViewById(R.id.txt_serviceCarTitle)
 
         btn_Next = findViewById(R.id.btn_NextObjectOrderDetail)
         btn_Back = findViewById(R.id.btn_Back)
@@ -101,9 +103,38 @@ class Act_DescriptionCars : AppCompatActivity() {
     fun getService(){
         //TODO Assignate the specific api for service cars name
         val apiInterface = RetrofitClient.instance?.create(Interface_RetrofitMethods::class.java)
-        val call = apiInterface?.getServicesCars()
+        val call = apiInterface?.getCarDescription_Name("11", serviceName.toString())
+
+        call?.enqueue(object : Callback<Model_ServicesCars> {
+            override fun onResponse(call: Call<Model_ServicesCars>, response: Response<Model_ServicesCars>){
+                if (response.isSuccessful) {
+                    val dataList = response.body()
+                    if (dataList != null) {
+                        txt_ServiceDescription?.text = dataList.description
+                        txt_title?.text = dataList.title
+
+                    }
+
+
+
+                } else {
+                    Toast.makeText(
+                        applicationContext,
+                        "Error al recuperar información: " + response.errorBody().toString(),
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            }
+            override fun onFailure(call: Call<Model_ServicesCars>, t: Throwable) {
+                Toast.makeText(
+                    applicationContext,
+                    "Error al recuperar información: " + t.toString(),
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        })
     }
-    fun getCarTypes(){
+    fun getCarTypesSpinner(){
         val apiInterface = RetrofitClient.instance?.create(Interface_RetrofitMethods::class.java)
         val call = apiInterface?.getCarType()
 

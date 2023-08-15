@@ -12,6 +12,8 @@ import com.carwashpremiere.carwashpremieremobile.R
 import com.carwashpremiere.carwashpremieremobile.adapters.Adapter_DetailsCar
 import com.carwashpremiere.carwashpremieremobile.adapters.Adapter_ExtraServicesCar
 import com.carwashpremiere.carwashpremieremobile.functions.Function_AdaptersUtility
+import com.carwashpremiere.carwashpremieremobile.model.Model_DetailsGeneral
+import com.carwashpremiere.carwashpremieremobile.model.Model_ExtraServicesGeneral
 
 class Act_CarParameters : AppCompatActivity() {
     var adapterExtraServicesCar: Adapter_ExtraServicesCar? = null
@@ -25,6 +27,8 @@ class Act_CarParameters : AppCompatActivity() {
     var List_DetailsCar: RecyclerView? = null
     var btn_Next: Button? = null
     var btn_Back: Button? = null
+    var mExtraServicesCar: List<Model_ExtraServicesGeneral> = ArrayList()
+    var mDetailsCar: List<Model_DetailsGeneral> = ArrayList()
 
     // Define initial value for total price
     private var totalPrice = 0.0
@@ -91,21 +95,23 @@ class Act_CarParameters : AppCompatActivity() {
     }
 
     private fun structureAdapters() {
-        val adaptersUtility = Function_AdaptersUtility()
+        val adaptersUtility = Function_AdaptersUtility(this)
 
         val linearLayoutManagerExtra = LinearLayoutManager(this)
         linearLayoutManagerExtra.orientation = LinearLayoutManager.VERTICAL
         List_ExtraServicesCar!!.layoutManager = linearLayoutManagerExtra
+        adapterExtraServicesCar = Adapter_ExtraServicesCar(this, mExtraServicesCar)
         List_ExtraServicesCar!!.adapter = adapterExtraServicesCar
 
         val linearLayoutManagerDetails = LinearLayoutManager(this)
         linearLayoutManagerDetails.orientation = LinearLayoutManager.VERTICAL
         List_DetailsCar!!.layoutManager = linearLayoutManagerDetails
+        adapterDetailsCar = Adapter_DetailsCar(this, mDetailsCar)
         List_DetailsCar!!.adapter = adapterDetailsCar
 
         //TODO: Adapt the adapters call to accept a create adapter like in details/extra services objects
-        adaptersUtility.createAdapterExtraServicesCar(this, List_ExtraServicesCar!!)
-        adaptersUtility.createAdapterDetailsCar(this, List_DetailsCar!!)
+        adaptersUtility.createAdapterExtraServicesCar(this, List_ExtraServicesCar!!, adapterExtraServicesCar!!)
+        adaptersUtility.createAdapterDetailsCar(this, List_DetailsCar!!, adapterDetailsCar!!)
     }
 
     private fun initUI() {

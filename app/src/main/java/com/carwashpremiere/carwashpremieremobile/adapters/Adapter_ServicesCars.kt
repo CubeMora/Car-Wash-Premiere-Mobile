@@ -33,13 +33,16 @@ class Adapter_ServicesCars(
     ) {
         holder.txt_name.text = mServicesCarsList[position].title
         holder.txt_description.text = mServicesCarsList[position].short_descritption
-        Picasso.get().load(mServicesCarsList[position].icon).into(holder.img_service)
+        serviceName = mServicesCarsList[position].title
+
+        Picasso.get().load(mServicesCarsList[position].imgUrl).into(holder.img_service)
         holder.itemView.tag = mServicesCarsList[position].id
         holder.btn_serviceCar.setOnClickListener {
             val categoryId = mServicesCarsList[position].id
             val activityId = mServicesCarsList[position].screen_name
             val serviceName = mServicesCarsList[position].title
             //Log.e("GET NAME", serviceName);
+
             val intent = Intent(mContext, Function_ActivityMap.getActivityClass(activityId))
             intent.putExtra("serviceTitle", serviceName)
             mContext.startActivity(intent)
@@ -50,6 +53,8 @@ class Adapter_ServicesCars(
         return mServicesCarsList.size
     }
 
+
+
     class ServicesCarsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var txt_name: TextView
         var txt_description: TextView
@@ -58,7 +63,7 @@ class Adapter_ServicesCars(
 
         init {
             txt_name = itemView.findViewById(R.id.txt_ServicesObjectsTitle)
-            txt_description = itemView.findViewById(R.id.txt_ServicesObjectsDescription)
+            txt_description = itemView.findViewById(R.id.txt_ServicesCarsDescription)
             img_service = itemView.findViewById(R.id.img_ServicesObjects)
             btn_serviceCar = itemView.findViewById(R.id.btn_ServicesCars)
         }

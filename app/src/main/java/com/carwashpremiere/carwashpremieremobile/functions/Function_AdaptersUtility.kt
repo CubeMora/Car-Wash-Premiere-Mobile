@@ -1,9 +1,19 @@
 package com.carwashpremiere.carwashpremieremobile.functions
 
+import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.util.Log
+import android.view.LayoutInflater
+import android.widget.Button
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.carwashpremiere.carwashpremieremobile.R
+
+import com.carwashpremiere.carwashpremieremobile.R.*
+import com.carwashpremiere.carwashpremieremobile.activities.Act_AdminCrud
+import com.carwashpremiere.carwashpremieremobile.activities.Menu
 import com.carwashpremiere.carwashpremieremobile.adapters.Adapter_Category
 import com.carwashpremiere.carwashpremieremobile.adapters.Adapter_DetailsCar
 import com.carwashpremiere.carwashpremieremobile.adapters.Adapter_DetailsObject
@@ -24,11 +34,61 @@ import retrofit2.Response
 
 
 
-class Function_AdaptersUtility {
+class Function_AdaptersUtility(var context: Context) {
+var flag: Boolean = false
+    var dialogLoading: Dialog? = null
+    var dialogRetry: Dialog?= null
+    var btn_retry: Button?= null
 
-    fun createAdapterCategory(context: Context, rView: RecyclerView) {
+    enum class RetryFunction {
+        CATEGORY,
+        SHORTCUTS,
+        CARTYPE,
+        CAR_DETAILS,
+        OBJECT_DETAILS,
+        EXTRASERVICES_CARS,
+        EXTRASERVICES_OBJECTS,
+        SERVICES_CARS,
+        SERVICES_OBJECTS,
+        PHONE,
+        SERVICE_CAR_SPECIFIC,
+
+
+        // OTHER_FUNCTION
+    }
+    fun showLoadingDialog() {
+        dialogLoading = Dialog(context) // Inicializar el dialogLoading
+        val view = LayoutInflater.from(context).inflate(layout.modal_loading, null)
+        dialogLoading!!.setContentView(view)
+        dialogLoading!!.setCancelable(false)
+        dialogLoading!!.show()
+    }
+
+    @SuppressLint("MissingInflatedId")
+    fun showRetryDialog(){
+        dialogRetry = Dialog(context) // Inicializar el dialogLoading
+        val view = LayoutInflater.from(context).inflate(layout.modal_retry, null)
+        dialogRetry!!.setContentView(view)
+        dialogRetry!!.setCancelable(false)
+        btn_retry = view.findViewById(R.id.btn_retry)
+
+        btn_retry!!.setOnClickListener {
+            var intent = Intent(context, Menu::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+            context.startActivity(intent)
+        }
+
+        dialogRetry!!.show()
+
+    }
+     fun closeLoadingDialog(){
+
+        dialogLoading!!.dismiss()
+    }
+    fun createAdapterCategory(rView: RecyclerView) {
         val apiInterface = RetrofitClient.instance?.create(Interface_RetrofitMethods::class.java)
         val call = apiInterface?.getCategories()
+        showLoadingDialog()
 
         call?.enqueue(object : Callback<List<Model_Category>> {
             override fun onResponse(call: Call<List<Model_Category>>, response: Response<List<Model_Category>>) {
@@ -40,6 +100,9 @@ class Function_AdaptersUtility {
                         Log.e("Adapter Category", dataList.toString())
                         rView.adapter = adapter
                     }
+
+                    closeLoadingDialog()
+
                 } else {
                     // Manejar el error de la respuesta
                     Toast.makeText(
@@ -47,6 +110,9 @@ class Function_AdaptersUtility {
                         "Error al recuperar información: " + response.errorBody().toString(),
                         Toast.LENGTH_LONG
                     ).show()
+
+                    showRetryDialog()
+
                 }
             }
 
@@ -56,11 +122,13 @@ class Function_AdaptersUtility {
                     "Error al recuperar información: " + t.message,
                     Toast.LENGTH_LONG
                 ).show()
+                Log.e("F", t.toString())
+                showRetryDialog()
             }
         })
     }
 
-    fun createAdapterShortcuts(context: Context, rView: RecyclerView) {
+    fun createAdapterShortcuts(rView: RecyclerView) {
         val apiInterface = RetrofitClient.instance?.create(Interface_RetrofitMethods::class.java)
         val call = apiInterface?.getShortcuts()
 
@@ -147,6 +215,8 @@ class Function_AdaptersUtility {
                         Toast.LENGTH_LONG
                     ).show()
                 }
+
+
             }
 
             override fun onFailure(call: Call<List<Model_ServicesObjects>>, t: Throwable) {
@@ -159,7 +229,7 @@ class Function_AdaptersUtility {
         })
     }
 
-    fun createAdapterDetailsCar(context: Context, rView: RecyclerView) {
+    fun createAdapterDetailsCar(context: Context,rView: RecyclerView, adapterDetailsCar: Adapter_DetailsCar) {
         val apiInterface = RetrofitClient.instance?.create(Interface_RetrofitMethods::class.java)
         val call = apiInterface?.getCarDetails()
 
@@ -169,8 +239,8 @@ class Function_AdaptersUtility {
                     val dataList = response.body()
                     if (dataList != null) {
                         // Crear un nuevo adaptador con los datos recibidos y establecerlo en el RecyclerView
-                        val adapter = Adapter_DetailsCar(context, dataList)
-                        rView.adapter = adapter
+                        adapterDetailsCar.setData(dataList)
+                        adapterDetailsCar.notifyDataSetChanged()
 
 
                     }
@@ -228,7 +298,7 @@ class Function_AdaptersUtility {
         })
     }
 
-    fun createAdapterExtraServicesCar(context: Context, rView: RecyclerView) {
+    fun createAdapterExtraServicesCar(context: Context, rView: RecyclerView, adapter: Adapter_ExtraServicesCar) {
         val apiInterface = RetrofitClient.instance?.create(Interface_RetrofitMethods::class.java)
         val call = apiInterface?.getExtraServicesCars()
 
@@ -238,8 +308,8 @@ class Function_AdaptersUtility {
                     val dataList = response.body()
                     if (dataList != null) {
                         // Crear un nuevo adaptador con los datos recibidos y establecerlo en el RecyclerView
-                        val adapter = Adapter_ExtraServicesCar(context, dataList)
-                        rView.adapter = adapter
+                        adapter?.setData(dataList)
+                        adapter?.notifyDataSetChanged()
                     }
                 } else {
                     // Manejar el error de la respuesta

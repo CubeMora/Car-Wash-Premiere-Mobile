@@ -8,13 +8,11 @@ import android.widget.*
 import com.carwashpremiere.carwashpremieremobile.R
 import com.carwashpremiere.carwashpremieremobile.functions.Interface_RetrofitMethods
 import com.carwashpremiere.carwashpremieremobile.functions.RetrofitClient
-import com.carwashpremiere.carwashpremieremobile.model.Data_RawData
 import com.carwashpremiere.carwashpremieremobile.model.Data_Test
 
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import kotlin.math.log
 
 class Act_testCRUD : AppCompatActivity() {
 
@@ -94,7 +92,7 @@ class Act_testCRUD : AppCompatActivity() {
                         fieldsFromDB.add(data)
                         Log.e("SI" , fieldsFromDB.toString())
 
-                        val parentLayout: LinearLayout? = dialog!!.findViewById(R.id.linLayout_EditText)
+                        val parentLayout: LinearLayout? = dialog!!.findViewById(R.id.linLayout_BtnLogin)
                         parentLayout?.removeAllViews() // Limpia las vistas previas
 
                         for (field in fieldsFromDB) {
